@@ -1,0 +1,6 @@
+@Chest_X_ray_HostAddress = http://localhost:5098
+
+GET {{Chest_X_ray_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

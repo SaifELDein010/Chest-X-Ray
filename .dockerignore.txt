@@ -1,0 +1,8 @@
+bin/
+obj/
+logs/
+publish/
+*.db
+.vs/
+.vscode/
+appsettings.Development.json

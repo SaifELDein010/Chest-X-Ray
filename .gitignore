@@ -3,3 +3,4 @@ publish/
 *.zip
 bin/
 obj/
+.vs/

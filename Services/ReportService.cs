@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Chest_Xray.Data;
 using Chest_Xray.DTOs;
 using Chest_Xray.Models;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 
 namespace Chest_Xray.Services;
 
@@ -38,8 +40,20 @@ public class ReportService : IReportService
             base64Image = Convert.ToBase64String(ms.ToArray());
         }
 
+        // Model mockup
         AiPredictionResult aiResult;
-        aiResult = await _aiService.PredictAsync(base64Image);
+        try
+        {
+            aiResult = await _aiService.PredictAsync(base64Image);
+        }
+        catch (Exception)
+        {
+            aiResult = GetMockPrediction();
+        }
+
+        // Model connection
+        //AiPredictionResult aiResult;
+        //aiResult = await _aiService.PredictAsync(base64Image);
 
         var (status, primaryDisease, overallConfidence) = DetermineReportStatus(aiResult.Predictions);
 
@@ -247,46 +261,225 @@ public class ReportService : IReportService
     }
 
     private byte[] GeneratePdf(Report report)
+{
+    using var ms = new MemoryStream();
+    using var document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 30, 30, 30, 30);
+    var writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, ms);
+    document.Open();
+
+    var darkBlue = new iTextSharp.text.BaseColor(0, 51, 102);
+    var red = new iTextSharp.text.BaseColor(220, 53, 69);
+    var green = new iTextSharp.text.BaseColor(25, 135, 84);
+    var yellow = new iTextSharp.text.BaseColor(255, 193, 7);
+    var lightRed = new iTextSharp.text.BaseColor(255, 245, 245);
+    var black = new iTextSharp.text.BaseColor(0, 0, 0);
+    var white = new iTextSharp.text.BaseColor(255, 255, 255);
+    var gray = new iTextSharp.text.BaseColor(128, 128, 128);
+    var lightGray = new iTextSharp.text.BaseColor(211, 211, 211);
+
+    var titleFont = new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 22, iTextSharp.text.Font.BOLD, darkBlue);
+    var headerFont = new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 14, iTextSharp.text.Font.BOLD, darkBlue);
+    var normalFont = new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 11, iTextSharp.text.Font.NORMAL, black);
+    var boldFont = new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 11, iTextSharp.text.Font.BOLD, black);
+    var smallFont = new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 9, iTextSharp.text.Font.NORMAL, gray);
+
+    var headerTable = new iTextSharp.text.pdf.PdfPTable(2);
+    headerTable.WidthPercentage = 100;
+    headerTable.SetWidths(new float[] { 70, 30 });
+
+    var logoCell = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("Chest X-Ray AI Analysis", titleFont));
+    logoCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+    logoCell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT;
+    headerTable.AddCell(logoCell);
+
+    var dateCell = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase($"Date: {report.CreatedAt:yyyy-MM-dd HH:mm}", smallFont));
+    dateCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+    dateCell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT;
+    headerTable.AddCell(dateCell);
+
+    document.Add(headerTable);
+
+    var line = new iTextSharp.text.pdf.draw.LineSeparator(1f, 100f, lightGray, iTextSharp.text.Element.ALIGN_CENTER, -2);
+    document.Add(new iTextSharp.text.Chunk(line));
+    document.Add(new iTextSharp.text.Paragraph(" "));
+
+    var statusColor = report.Status switch
     {
-        using var ms = new MemoryStream();
-        using var document = new iTextSharp.text.Document();
-        var writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, ms);
-        document.Open();
+        "Abnormal" => red,
+        "Healthy" => green,
+        "ReviewNeeded" => yellow,
+        _ => black
+    };
 
-        var titleFont = new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 18, iTextSharp.text.Font.BOLD);
-        var normalFont = new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 12, iTextSharp.text.Font.NORMAL);
+    var infoTable = new iTextSharp.text.pdf.PdfPTable(2);
+    infoTable.WidthPercentage = 100;
+    infoTable.SetWidths(new float[] { 40, 60 });
+    infoTable.SpacingAfter = 15;
 
-        document.Add(new iTextSharp.text.Paragraph("Chest X-Ray Analysis Report", titleFont));
-        document.Add(new iTextSharp.text.Paragraph(" "));
+    infoTable.AddCell(CreateInfoCell("Status:", boldFont));
+    var statusCell = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(report.Status, new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 12, iTextSharp.text.Font.BOLD, statusColor)));
+    statusCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+    statusCell.PaddingBottom = 8;
+    infoTable.AddCell(statusCell);
 
-        document.Add(new iTextSharp.text.Paragraph($"Report Date: {report.CreatedAt:yyyy-MM-dd HH:mm}", normalFont));
-        document.Add(new iTextSharp.text.Paragraph($"Status: {report.Status}", normalFont));
-        document.Add(new iTextSharp.text.Paragraph($"Primary Disease: {report.PrimaryDisease ?? "None"}", normalFont));
-        document.Add(new iTextSharp.text.Paragraph($"Confidence: {report.OverallConfidence:P2}", normalFont));
-        document.Add(new iTextSharp.text.Paragraph(" "));
+    infoTable.AddCell(CreateInfoCell("Primary Disease:", boldFont));
+    infoTable.AddCell(CreateInfoCell(report.PrimaryDisease ?? "None Detected", normalFont));
 
-        var originalPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", report.OriginalImagePath.TrimStart('/'));
+    infoTable.AddCell(CreateInfoCell("Confidence Score:", boldFont));
+    infoTable.AddCell(CreateInfoCell($"{report.OverallConfidence:P2}", normalFont));
 
-        if (File.Exists(originalPath))
-        {
-            var img = iTextSharp.text.Image.GetInstance(originalPath);
-            img.ScaleToFit(300, 300);
-            document.Add(img);
-            document.Add(new iTextSharp.text.Paragraph(" "));
-        }
+    infoTable.AddCell(CreateInfoCell("Report ID:", boldFont));
+    infoTable.AddCell(CreateInfoCell($"#{report.ReportId}", smallFont));
 
-        var heatmapPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", report.HeatmapImagePath.TrimStart('/'));
+    document.Add(infoTable);
 
-        if (File.Exists(heatmapPath))
-        {
-            document.Add(new iTextSharp.text.Paragraph("AI Analysis Heatmap:", normalFont));
-            var heatmapImg = iTextSharp.text.Image.GetInstance(heatmapPath);
-            heatmapImg.ScaleToFit(300, 300);
-            document.Add(heatmapImg);
-        }
+    document.Add(new iTextSharp.text.Paragraph("Pathology Predictions", headerFont));
+    document.Add(new iTextSharp.text.Paragraph(" "));
 
-        document.Close();
-        return ms.ToArray();
+    var predTable = new iTextSharp.text.pdf.PdfPTable(4);
+    predTable.WidthPercentage = 100;
+    predTable.SetWidths(new float[] { 35, 20, 20, 25 });
+    predTable.SpacingAfter = 20;
+
+    predTable.AddCell(CreateHeaderCell("Pathology", darkBlue));
+    predTable.AddCell(CreateHeaderCell("Confidence", darkBlue));
+    predTable.AddCell(CreateHeaderCell("Threshold", darkBlue));
+    predTable.AddCell(CreateHeaderCell("Status", darkBlue));
+
+    var predictions = JsonSerializer.Deserialize<List<PredictionItem>>(report.PredictionsJson) ?? new();
+
+    foreach (var pred in predictions)
+    {
+        var bgColor = pred.Detected ? lightRed : white;
+
+        predTable.AddCell(CreateDataCell(pred.Pathology, normalFont, bgColor));
+        predTable.AddCell(CreateDataCell($"{pred.Confidence:P2}", normalFont, bgColor));
+        predTable.AddCell(CreateDataCell("--", smallFont, bgColor));
+
+        var detectedText = pred.Detected ? "✓ Detected" : "✗ Not Detected";
+        var detectedColor = pred.Detected ? red : green;
+        predTable.AddCell(CreateDataCell(detectedText, new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 10, iTextSharp.text.Font.BOLD, detectedColor), bgColor));
     }
 
+    document.Add(predTable);
+
+    document.Add(new iTextSharp.text.Paragraph("X-Ray Analysis Images", headerFont));
+    document.Add(new iTextSharp.text.Paragraph(" "));
+
+    var originalPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", report.OriginalImagePath.TrimStart('/'));
+    var heatmapPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", report.HeatmapImagePath.TrimStart('/'));
+
+    var imageTable = new iTextSharp.text.pdf.PdfPTable(2);
+    imageTable.WidthPercentage = 100;
+    imageTable.SetWidths(new float[] { 50, 50 });
+
+    if (File.Exists(originalPath))
+    {
+        var originalImg = iTextSharp.text.Image.GetInstance(originalPath);
+        originalImg.ScaleToFit(250, 250);
+        var originalCell = new iTextSharp.text.pdf.PdfPCell(originalImg);
+        originalCell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER;
+        originalCell.Border = iTextSharp.text.Rectangle.BOX;
+        originalCell.BorderColor = lightGray;
+        originalCell.Padding = 8;
+        imageTable.AddCell(originalCell);
+    }
+    else
+    {
+        imageTable.AddCell(CreateDataCell("Not available", smallFont, white));
+    }
+
+    if (File.Exists(heatmapPath))
+    {
+        var heatmapImg = iTextSharp.text.Image.GetInstance(heatmapPath);
+        heatmapImg.ScaleToFit(250, 250);
+        var heatmapCell = new iTextSharp.text.pdf.PdfPCell(heatmapImg);
+        heatmapCell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER;
+        heatmapCell.Border = iTextSharp.text.Rectangle.BOX;
+        heatmapCell.BorderColor = lightGray;
+        heatmapCell.Padding = 8;
+        imageTable.AddCell(heatmapCell);
+    }
+    else
+    {
+        imageTable.AddCell(CreateDataCell("Not available", smallFont, white));
+    }
+
+    var captionTable = new iTextSharp.text.pdf.PdfPTable(2);
+    captionTable.WidthPercentage = 100;
+    captionTable.SetWidths(new float[] { 50, 50 });
+
+    captionTable.AddCell(CreateCaptionCell("Original X-Ray Image"));
+    captionTable.AddCell(CreateCaptionCell("AI Heatmap Overlay"));
+
+    document.Add(imageTable);
+    document.Add(captionTable);
+
+    document.Add(new iTextSharp.text.Paragraph(" "));
+    var footerLine = new iTextSharp.text.pdf.draw.LineSeparator(1f, 100f, lightGray, iTextSharp.text.Element.ALIGN_CENTER, -2);
+    document.Add(new iTextSharp.text.Chunk(footerLine));
+    document.Add(new iTextSharp.text.Paragraph(" "));
+
+    var footer = new iTextSharp.text.Paragraph("Generated by Chest X-Ray AI Analysis System | For clinical decision support only.", smallFont);
+    footer.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
+    document.Add(footer);
+
+    document.Close();
+    return ms.ToArray();
+    }
+
+    private iTextSharp.text.pdf.PdfPCell CreateInfoCell(string text, iTextSharp.text.Font font)
+    {
+        var cell = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(text, font));
+        cell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+        cell.PaddingBottom = 6;
+        return cell;
+    }
+
+    private iTextSharp.text.pdf.PdfPCell CreateHeaderCell(string text, iTextSharp.text.BaseColor bgColor)
+    {
+        var cell = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(text, new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 11, iTextSharp.text.Font.BOLD, new iTextSharp.text.BaseColor(255, 255, 255))));
+        cell.BackgroundColor = bgColor;
+        cell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER;
+        cell.VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE;
+        cell.Padding = 8;
+        cell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+        return cell;
+    }
+
+    private iTextSharp.text.pdf.PdfPCell CreateDataCell(string text, iTextSharp.text.Font font, iTextSharp.text.BaseColor bgColor)
+    {
+        var cell = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(text, font));
+        cell.BackgroundColor = bgColor;
+        cell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER;
+        cell.VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE;
+        cell.Padding = 6;
+        cell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+        cell.BorderColor = new iTextSharp.text.BaseColor(211, 211, 211);
+        return cell;
+    }
+
+    private iTextSharp.text.pdf.PdfPCell CreateCaptionCell(string text)
+    {
+        var cell = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(text, new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 10, iTextSharp.text.Font.ITALIC, new iTextSharp.text.BaseColor(128, 128, 128))));
+        cell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER;
+        cell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+        cell.PaddingTop = 5;
+        return cell;
+    }
+
+    // Mock Data Fallback
+    private AiPredictionResult GetMockPrediction()
+    {
+        return new AiPredictionResult
+        {
+            Predictions = new List<PredictionItem>
+            {
+                new() { Pathology = "Atelectasis", Confidence = 0.85m, Detected = true },
+                new() { Pathology = "Effusion", Confidence = 0.25m, Detected = false },
+                new() { Pathology = "Pneumothorax", Confidence = 0.10m, Detected = false }
+            },
+            HeatmapBase64 = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+        };
+    }
 }

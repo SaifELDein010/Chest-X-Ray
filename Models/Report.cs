@@ -2,8 +2,8 @@
 
 public class Report
 {
-    public int ReportId { get; set; }
-    public int UserId { get; set; }
+    public Guid ReportId { get; set; } = Guid.NewGuid();
+    public Guid UserId { get; set; }
     public string ReportName { get; set; } = string.Empty;
     public string Status { get; set; } = string.Empty;
     public string? PrimaryDisease { get; set; }

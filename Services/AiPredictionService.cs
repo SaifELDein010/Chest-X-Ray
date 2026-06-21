@@ -18,7 +18,7 @@ public class AiPredictionService : IAiPredictionService
 
     public async Task<AiPredictionResult> PredictAsync(string base64Image)
     {
-        var aiServiceUrl = _configuration["AiService:Url"] ?? "http://localhost:8000/api/predict";
+        var aiServiceUrl = _configuration["AiService:Url"] ?? "http://localhost:7860/api/predict";
         var apiKey = _configuration["AiService:ApiKey"] ?? "";
 
         var payload = new

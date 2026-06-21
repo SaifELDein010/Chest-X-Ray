@@ -2,7 +2,7 @@
 
 public class ReportDto
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string Status { get; set; } = string.Empty;
     public string? PrimaryDisease { get; set; }
     public List<PredictionDto> Predictions { get; set; } = new();

@@ -21,7 +21,7 @@ public class ReportService : IReportService
         _env = env;
     }
 
-    public async Task<ReportDto> UploadAndAnalyzeAsync(int userId, IFormFile image)
+    public async Task<ReportDto> UploadAndAnalyzeAsync(Guid userId, IFormFile image)
     {
         if (image == null || image.Length == 0)
             throw new ArgumentException("No image provided");
@@ -34,26 +34,17 @@ public class ReportService : IReportService
             throw new ArgumentException("Invalid format. Only PNG and JPG allowed");
 
         string base64Image;
+        byte[] originalImageBytes;
         using (var ms = new MemoryStream())
         {
             await image.CopyToAsync(ms);
-            base64Image = Convert.ToBase64String(ms.ToArray());
-        }
-
-        // Model mockup
-        AiPredictionResult aiResult;
-        try
-        {
-            aiResult = await _aiService.PredictAsync(base64Image);
-        }
-        catch (Exception)
-        {
-            aiResult = GetMockPrediction();
+            originalImageBytes = ms.ToArray();
+            base64Image = Convert.ToBase64String(originalImageBytes);
         }
 
         // Model connection
-        //AiPredictionResult aiResult;
-        //aiResult = await _aiService.PredictAsync(base64Image);
+        AiPredictionResult aiResult;
+        aiResult = await _aiService.PredictAsync(base64Image);
 
         var (status, primaryDisease, overallConfidence) = DetermineReportStatus(aiResult.Predictions);
 
@@ -61,19 +52,34 @@ public class ReportService : IReportService
         var originalFileName = $"original_{reportId}.png";
         var originalPath = Path.Combine("wwwroot", "uploads", "originals", originalFileName);
 
-        using (var ms = new MemoryStream())
-        {
-            await image.CopyToAsync(ms);
-            await File.WriteAllBytesAsync(originalPath, ms.ToArray());
-        }
+        // حفظ الصورة الأصلية
+        await File.WriteAllBytesAsync(originalPath, originalImageBytes);
 
+        // حفظ صورة Heatmap بنفس أبعاد الصورة الأصلية
         var heatmapFileName = $"heatmap_{reportId}.png";
         var heatmapPath = Path.Combine("wwwroot", "uploads", "heatmaps", heatmapFileName);
 
         if (!string.IsNullOrEmpty(aiResult.HeatmapBase64))
         {
             var heatmapBytes = Convert.FromBase64String(aiResult.HeatmapBase64);
-            await File.WriteAllBytesAsync(heatmapPath, heatmapBytes);
+
+            try
+            {
+                using var originalMs = new MemoryStream(originalImageBytes);
+                using var originalImage = System.Drawing.Image.FromStream(originalMs);
+                int originalWidth = originalImage.Width;
+                int originalHeight = originalImage.Height;
+
+                using var heatmapMs = new MemoryStream(heatmapBytes);
+                using var heatmapImage = System.Drawing.Image.FromStream(heatmapMs);
+                using var resizedHeatmap = new System.Drawing.Bitmap(heatmapImage, originalWidth, originalHeight);
+
+                resizedHeatmap.Save(heatmapPath, System.Drawing.Imaging.ImageFormat.Png);
+            }
+            catch
+            {
+                await File.WriteAllBytesAsync(heatmapPath, heatmapBytes);
+            }
         }
 
         var report = new Report
@@ -95,16 +101,28 @@ public class ReportService : IReportService
         return MapToReportDto(report);
     }
 
-    public async Task<PagedReportResponseDto> GetReportsAsync(int userId, int page, int limit, string? status, string? search)
+    public async Task<PagedReportResponseDto> GetReportsAsync(Guid userId, int page, int limit, string? status, string? search)
     {
         var query = _context.Reports.Where(r => r.UserId == userId);
 
+        // Filter by status
         if (!string.IsNullOrEmpty(status))
             query = query.Where(r => r.Status.ToLower() == status.ToLower());
 
+        // Search in: ReportName, Status, PrimaryDisease, ReportId, PredictionsJson
         if (!string.IsNullOrEmpty(search))
-            query = query.Where(r => r.ReportName.Contains(search));
+        {
+            var searchLower = search.ToLower();
+            query = query.Where(r =>
+                r.ReportName.ToLower().Contains(searchLower) ||
+                r.Status.ToLower().Contains(searchLower) ||
+                (r.PrimaryDisease != null && r.PrimaryDisease.ToLower().Contains(searchLower)) ||
+                r.ReportId.ToString().ToLower().Contains(searchLower) ||
+                r.PredictionsJson.ToLower().Contains(searchLower)
+            );
+        }
 
+        // Stats
         var allReports = await _context.Reports.Where(r => r.UserId == userId).ToListAsync();
         var stats = new StatsDto
         {
@@ -114,6 +132,7 @@ public class ReportService : IReportService
             AvgConfidence = allReports.Any() ? Math.Round(allReports.Average(r => r.OverallConfidence), 2) : 0
         };
 
+        // Pagination
         var totalItems = await query.CountAsync();
         var totalPages = (int)Math.Ceiling(totalItems / (double)limit);
 
@@ -148,20 +167,28 @@ public class ReportService : IReportService
         };
     }
 
-    public async Task<ReportDto?> GetReportByIdAsync(int userId, int reportId)
+    public async Task<ReportDto?> GetReportByIdAsync(Guid userId, Guid reportId)
     {
-        var report = await _context.Reports
-            .FirstOrDefaultAsync(r => r.ReportId == reportId && r.UserId == userId);
+        var report = await _context.Reports.FindAsync(reportId);
 
-        return report == null ? null : MapToReportDto(report);
+        if (report == null)
+            return null;
+
+        if (report.UserId != userId)
+            throw new UnauthorizedAccessException("You are not authorized to view this report");
+
+        return MapToReportDto(report);
     }
 
-    public async Task<ReportDto?> UpdateReportNameAsync(int userId, int reportId, string reportName)
+    public async Task<ReportDto?> UpdateReportNameAsync(Guid userId, Guid reportId, string reportName)
     {
-        var report = await _context.Reports
-            .FirstOrDefaultAsync(r => r.ReportId == reportId && r.UserId == userId);
+        var report = await _context.Reports.FindAsync(reportId);
 
-        if (report == null) return null;
+        if (report == null)
+            return null;
+
+        if (report.UserId != userId)
+            throw new UnauthorizedAccessException("You are not authorized to update this report");
 
         report.ReportName = reportName;
         await _context.SaveChangesAsync();
@@ -169,12 +196,15 @@ public class ReportService : IReportService
         return MapToReportDto(report);
     }
 
-    public async Task<bool> DeleteReportAsync(int userId, int reportId)
+    public async Task<bool> DeleteReportAsync(Guid userId, Guid reportId)
     {
-        var report = await _context.Reports
-            .FirstOrDefaultAsync(r => r.ReportId == reportId && r.UserId == userId);
+        var report = await _context.Reports.FindAsync(reportId);
 
-        if (report == null) return false;
+        if (report == null)
+            return false;
+
+        if (report.UserId != userId)
+            throw new UnauthorizedAccessException("You are not authorized to delete this report");
 
         var originalPath = Path.Combine("wwwroot", report.OriginalImagePath.TrimStart('/'));
         var heatmapPath = Path.Combine("wwwroot", report.HeatmapImagePath.TrimStart('/'));
@@ -187,34 +217,34 @@ public class ReportService : IReportService
         return true;
     }
 
-    public async Task<byte[]?> GetOriginalImageAsync(int userId, int reportId)
+    public async Task<byte[]?> GetOriginalImageAsync(Guid userId, Guid reportId)
     {
-        var report = await _context.Reports
-            .FirstOrDefaultAsync(r => r.ReportId == reportId && r.UserId == userId);
+        var report = await _context.Reports.FindAsync(reportId);
 
         if (report == null) return null;
+        if (report.UserId != userId) throw new UnauthorizedAccessException("Unauthorized");
 
         var path = Path.Combine("wwwroot", report.OriginalImagePath.TrimStart('/'));
         return File.Exists(path) ? await File.ReadAllBytesAsync(path) : null;
     }
 
-    public async Task<byte[]?> GetHeatmapImageAsync(int userId, int reportId)
+    public async Task<byte[]?> GetHeatmapImageAsync(Guid userId, Guid reportId)
     {
-        var report = await _context.Reports
-            .FirstOrDefaultAsync(r => r.ReportId == reportId && r.UserId == userId);
+        var report = await _context.Reports.FindAsync(reportId);
 
         if (report == null) return null;
+        if (report.UserId != userId) throw new UnauthorizedAccessException("Unauthorized");
 
         var path = Path.Combine("wwwroot", report.HeatmapImagePath.TrimStart('/'));
         return File.Exists(path) ? await File.ReadAllBytesAsync(path) : null;
     }
 
-    public async Task<byte[]?> GeneratePdfAsync(int userId, int reportId)
+    public async Task<byte[]?> GeneratePdfAsync(Guid userId, Guid reportId)
     {
-        var report = await _context.Reports
-            .FirstOrDefaultAsync(r => r.ReportId == reportId && r.UserId == userId);
+        var report = await _context.Reports.FindAsync(reportId);
 
         if (report == null) return null;
+        if (report.UserId != userId) throw new UnauthorizedAccessException("Unauthorized");
 
         return GeneratePdf(report);
     }
@@ -261,171 +291,171 @@ public class ReportService : IReportService
     }
 
     private byte[] GeneratePdf(Report report)
-{
-    using var ms = new MemoryStream();
-    using var document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 30, 30, 30, 30);
-    var writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, ms);
-    document.Open();
-
-    var darkBlue = new iTextSharp.text.BaseColor(0, 51, 102);
-    var red = new iTextSharp.text.BaseColor(220, 53, 69);
-    var green = new iTextSharp.text.BaseColor(25, 135, 84);
-    var yellow = new iTextSharp.text.BaseColor(255, 193, 7);
-    var lightRed = new iTextSharp.text.BaseColor(255, 245, 245);
-    var black = new iTextSharp.text.BaseColor(0, 0, 0);
-    var white = new iTextSharp.text.BaseColor(255, 255, 255);
-    var gray = new iTextSharp.text.BaseColor(128, 128, 128);
-    var lightGray = new iTextSharp.text.BaseColor(211, 211, 211);
-
-    var titleFont = new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 22, iTextSharp.text.Font.BOLD, darkBlue);
-    var headerFont = new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 14, iTextSharp.text.Font.BOLD, darkBlue);
-    var normalFont = new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 11, iTextSharp.text.Font.NORMAL, black);
-    var boldFont = new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 11, iTextSharp.text.Font.BOLD, black);
-    var smallFont = new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 9, iTextSharp.text.Font.NORMAL, gray);
-
-    var headerTable = new iTextSharp.text.pdf.PdfPTable(2);
-    headerTable.WidthPercentage = 100;
-    headerTable.SetWidths(new float[] { 70, 30 });
-
-    var logoCell = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("Chest X-Ray AI Analysis", titleFont));
-    logoCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
-    logoCell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT;
-    headerTable.AddCell(logoCell);
-
-    var dateCell = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase($"Date: {report.CreatedAt:yyyy-MM-dd HH:mm}", smallFont));
-    dateCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
-    dateCell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT;
-    headerTable.AddCell(dateCell);
-
-    document.Add(headerTable);
-
-    var line = new iTextSharp.text.pdf.draw.LineSeparator(1f, 100f, lightGray, iTextSharp.text.Element.ALIGN_CENTER, -2);
-    document.Add(new iTextSharp.text.Chunk(line));
-    document.Add(new iTextSharp.text.Paragraph(" "));
-
-    var statusColor = report.Status switch
     {
-        "Abnormal" => red,
-        "Healthy" => green,
-        "ReviewNeeded" => yellow,
-        _ => black
-    };
+        using var ms = new MemoryStream();
+        using var document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 30, 30, 30, 30);
+        var writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, ms);
+        document.Open();
 
-    var infoTable = new iTextSharp.text.pdf.PdfPTable(2);
-    infoTable.WidthPercentage = 100;
-    infoTable.SetWidths(new float[] { 40, 60 });
-    infoTable.SpacingAfter = 15;
+        var darkBlue = new iTextSharp.text.BaseColor(0, 51, 102);
+        var red = new iTextSharp.text.BaseColor(220, 53, 69);
+        var green = new iTextSharp.text.BaseColor(25, 135, 84);
+        var yellow = new iTextSharp.text.BaseColor(255, 193, 7);
+        var lightRed = new iTextSharp.text.BaseColor(255, 245, 245);
+        var black = new iTextSharp.text.BaseColor(0, 0, 0);
+        var white = new iTextSharp.text.BaseColor(255, 255, 255);
+        var gray = new iTextSharp.text.BaseColor(128, 128, 128);
+        var lightGray = new iTextSharp.text.BaseColor(211, 211, 211);
 
-    infoTable.AddCell(CreateInfoCell("Status:", boldFont));
-    var statusCell = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(report.Status, new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 12, iTextSharp.text.Font.BOLD, statusColor)));
-    statusCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
-    statusCell.PaddingBottom = 8;
-    infoTable.AddCell(statusCell);
+        var titleFont = new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 22, iTextSharp.text.Font.BOLD, darkBlue);
+        var headerFont = new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 14, iTextSharp.text.Font.BOLD, darkBlue);
+        var normalFont = new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 11, iTextSharp.text.Font.NORMAL, black);
+        var boldFont = new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 11, iTextSharp.text.Font.BOLD, black);
+        var smallFont = new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 9, iTextSharp.text.Font.NORMAL, gray);
 
-    infoTable.AddCell(CreateInfoCell("Primary Disease:", boldFont));
-    infoTable.AddCell(CreateInfoCell(report.PrimaryDisease ?? "None Detected", normalFont));
+        var headerTable = new iTextSharp.text.pdf.PdfPTable(2);
+        headerTable.WidthPercentage = 100;
+        headerTable.SetWidths(new float[] { 70, 30 });
 
-    infoTable.AddCell(CreateInfoCell("Confidence Score:", boldFont));
-    infoTable.AddCell(CreateInfoCell($"{report.OverallConfidence:P2}", normalFont));
+        var logoCell = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("Chest X-Ray AI Analysis", titleFont));
+        logoCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+        logoCell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT;
+        headerTable.AddCell(logoCell);
 
-    infoTable.AddCell(CreateInfoCell("Report ID:", boldFont));
-    infoTable.AddCell(CreateInfoCell($"#{report.ReportId}", smallFont));
+        var dateCell = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase($"Date: {report.CreatedAt:yyyy-MM-dd HH:mm}", smallFont));
+        dateCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+        dateCell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT;
+        headerTable.AddCell(dateCell);
 
-    document.Add(infoTable);
+        document.Add(headerTable);
 
-    document.Add(new iTextSharp.text.Paragraph("Pathology Predictions", headerFont));
-    document.Add(new iTextSharp.text.Paragraph(" "));
+        var line = new iTextSharp.text.pdf.draw.LineSeparator(1f, 100f, lightGray, iTextSharp.text.Element.ALIGN_CENTER, -2);
+        document.Add(new iTextSharp.text.Chunk(line));
+        document.Add(new iTextSharp.text.Paragraph(" "));
 
-    var predTable = new iTextSharp.text.pdf.PdfPTable(4);
-    predTable.WidthPercentage = 100;
-    predTable.SetWidths(new float[] { 35, 20, 20, 25 });
-    predTable.SpacingAfter = 20;
+        var statusColor = report.Status switch
+        {
+            "Abnormal" => red,
+            "Healthy" => green,
+            "ReviewNeeded" => yellow,
+            _ => black
+        };
 
-    predTable.AddCell(CreateHeaderCell("Pathology", darkBlue));
-    predTable.AddCell(CreateHeaderCell("Confidence", darkBlue));
-    predTable.AddCell(CreateHeaderCell("Threshold", darkBlue));
-    predTable.AddCell(CreateHeaderCell("Status", darkBlue));
+        var infoTable = new iTextSharp.text.pdf.PdfPTable(2);
+        infoTable.WidthPercentage = 100;
+        infoTable.SetWidths(new float[] { 40, 60 });
+        infoTable.SpacingAfter = 15;
 
-    var predictions = JsonSerializer.Deserialize<List<PredictionItem>>(report.PredictionsJson) ?? new();
+        infoTable.AddCell(CreateInfoCell("Status:", boldFont));
+        var statusCell = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(report.Status, new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 12, iTextSharp.text.Font.BOLD, statusColor)));
+        statusCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+        statusCell.PaddingBottom = 8;
+        infoTable.AddCell(statusCell);
 
-    foreach (var pred in predictions)
-    {
-        var bgColor = pred.Detected ? lightRed : white;
+        infoTable.AddCell(CreateInfoCell("Primary Disease:", boldFont));
+        infoTable.AddCell(CreateInfoCell(report.PrimaryDisease ?? "None Detected", normalFont));
 
-        predTable.AddCell(CreateDataCell(pred.Pathology, normalFont, bgColor));
-        predTable.AddCell(CreateDataCell($"{pred.Confidence:P2}", normalFont, bgColor));
-        predTable.AddCell(CreateDataCell("--", smallFont, bgColor));
+        infoTable.AddCell(CreateInfoCell("Confidence Score:", boldFont));
+        infoTable.AddCell(CreateInfoCell($"{report.OverallConfidence:P2}", normalFont));
 
-        var detectedText = pred.Detected ? "✓ Detected" : "✗ Not Detected";
-        var detectedColor = pred.Detected ? red : green;
-        predTable.AddCell(CreateDataCell(detectedText, new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 10, iTextSharp.text.Font.BOLD, detectedColor), bgColor));
-    }
+        infoTable.AddCell(CreateInfoCell("Report ID:", boldFont));
+        infoTable.AddCell(CreateInfoCell($"#{report.ReportId}", smallFont));
 
-    document.Add(predTable);
+        document.Add(infoTable);
 
-    document.Add(new iTextSharp.text.Paragraph("X-Ray Analysis Images", headerFont));
-    document.Add(new iTextSharp.text.Paragraph(" "));
+        document.Add(new iTextSharp.text.Paragraph("Pathology Predictions", headerFont));
+        document.Add(new iTextSharp.text.Paragraph(" "));
 
-    var originalPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", report.OriginalImagePath.TrimStart('/'));
-    var heatmapPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", report.HeatmapImagePath.TrimStart('/'));
+        var predTable = new iTextSharp.text.pdf.PdfPTable(4);
+        predTable.WidthPercentage = 100;
+        predTable.SetWidths(new float[] { 35, 20, 20, 25 });
+        predTable.SpacingAfter = 20;
 
-    var imageTable = new iTextSharp.text.pdf.PdfPTable(2);
-    imageTable.WidthPercentage = 100;
-    imageTable.SetWidths(new float[] { 50, 50 });
+        predTable.AddCell(CreateHeaderCell("Pathology", darkBlue));
+        predTable.AddCell(CreateHeaderCell("Confidence", darkBlue));
+        predTable.AddCell(CreateHeaderCell("Threshold", darkBlue));
+        predTable.AddCell(CreateHeaderCell("Status", darkBlue));
 
-    if (File.Exists(originalPath))
-    {
-        var originalImg = iTextSharp.text.Image.GetInstance(originalPath);
-        originalImg.ScaleToFit(250, 250);
-        var originalCell = new iTextSharp.text.pdf.PdfPCell(originalImg);
-        originalCell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER;
-        originalCell.Border = iTextSharp.text.Rectangle.BOX;
-        originalCell.BorderColor = lightGray;
-        originalCell.Padding = 8;
-        imageTable.AddCell(originalCell);
-    }
-    else
-    {
-        imageTable.AddCell(CreateDataCell("Not available", smallFont, white));
-    }
+        var predictions = JsonSerializer.Deserialize<List<PredictionItem>>(report.PredictionsJson) ?? new();
 
-    if (File.Exists(heatmapPath))
-    {
-        var heatmapImg = iTextSharp.text.Image.GetInstance(heatmapPath);
-        heatmapImg.ScaleToFit(250, 250);
-        var heatmapCell = new iTextSharp.text.pdf.PdfPCell(heatmapImg);
-        heatmapCell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER;
-        heatmapCell.Border = iTextSharp.text.Rectangle.BOX;
-        heatmapCell.BorderColor = lightGray;
-        heatmapCell.Padding = 8;
-        imageTable.AddCell(heatmapCell);
-    }
-    else
-    {
-        imageTable.AddCell(CreateDataCell("Not available", smallFont, white));
-    }
+        foreach (var pred in predictions)
+        {
+            var bgColor = pred.Detected ? lightRed : white;
 
-    var captionTable = new iTextSharp.text.pdf.PdfPTable(2);
-    captionTable.WidthPercentage = 100;
-    captionTable.SetWidths(new float[] { 50, 50 });
+            predTable.AddCell(CreateDataCell(pred.Pathology, normalFont, bgColor));
+            predTable.AddCell(CreateDataCell($"{pred.Confidence:P2}", normalFont, bgColor));
+            predTable.AddCell(CreateDataCell("--", smallFont, bgColor));
 
-    captionTable.AddCell(CreateCaptionCell("Original X-Ray Image"));
-    captionTable.AddCell(CreateCaptionCell("AI Heatmap Overlay"));
+            var detectedText = pred.Detected ? "✓ Detected" : "✗ Not Detected";
+            var detectedColor = pred.Detected ? red : green;
+            predTable.AddCell(CreateDataCell(detectedText, new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 10, iTextSharp.text.Font.BOLD, detectedColor), bgColor));
+        }
 
-    document.Add(imageTable);
-    document.Add(captionTable);
+        document.Add(predTable);
 
-    document.Add(new iTextSharp.text.Paragraph(" "));
-    var footerLine = new iTextSharp.text.pdf.draw.LineSeparator(1f, 100f, lightGray, iTextSharp.text.Element.ALIGN_CENTER, -2);
-    document.Add(new iTextSharp.text.Chunk(footerLine));
-    document.Add(new iTextSharp.text.Paragraph(" "));
+        document.Add(new iTextSharp.text.Paragraph("X-Ray Analysis Images", headerFont));
+        document.Add(new iTextSharp.text.Paragraph(" "));
 
-    var footer = new iTextSharp.text.Paragraph("Generated by Chest X-Ray AI Analysis System | For clinical decision support only.", smallFont);
-    footer.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
-    document.Add(footer);
+        var originalPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", report.OriginalImagePath.TrimStart('/'));
+        var heatmapPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", report.HeatmapImagePath.TrimStart('/'));
 
-    document.Close();
-    return ms.ToArray();
+        var imageTable = new iTextSharp.text.pdf.PdfPTable(2);
+        imageTable.WidthPercentage = 100;
+        imageTable.SetWidths(new float[] { 50, 50 });
+
+        if (File.Exists(originalPath))
+        {
+            var originalImg = iTextSharp.text.Image.GetInstance(originalPath);
+            originalImg.ScaleToFit(250, 250);
+            var originalCell = new iTextSharp.text.pdf.PdfPCell(originalImg);
+            originalCell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER;
+            originalCell.Border = iTextSharp.text.Rectangle.BOX;
+            originalCell.BorderColor = lightGray;
+            originalCell.Padding = 8;
+            imageTable.AddCell(originalCell);
+        }
+        else
+        {
+            imageTable.AddCell(CreateDataCell("Not available", smallFont, white));
+        }
+
+        if (File.Exists(heatmapPath))
+        {
+            var heatmapImg = iTextSharp.text.Image.GetInstance(heatmapPath);
+            heatmapImg.ScaleToFit(250, 250);
+            var heatmapCell = new iTextSharp.text.pdf.PdfPCell(heatmapImg);
+            heatmapCell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER;
+            heatmapCell.Border = iTextSharp.text.Rectangle.BOX;
+            heatmapCell.BorderColor = lightGray;
+            heatmapCell.Padding = 8;
+            imageTable.AddCell(heatmapCell);
+        }
+        else
+        {
+            imageTable.AddCell(CreateDataCell("Not available", smallFont, white));
+        }
+
+        var captionTable = new iTextSharp.text.pdf.PdfPTable(2);
+        captionTable.WidthPercentage = 100;
+        captionTable.SetWidths(new float[] { 50, 50 });
+
+        captionTable.AddCell(CreateCaptionCell("Original X-Ray Image"));
+        captionTable.AddCell(CreateCaptionCell("AI Heatmap Overlay"));
+
+        document.Add(imageTable);
+        document.Add(captionTable);
+
+        document.Add(new iTextSharp.text.Paragraph(" "));
+        var footerLine = new iTextSharp.text.pdf.draw.LineSeparator(1f, 100f, lightGray, iTextSharp.text.Element.ALIGN_CENTER, -2);
+        document.Add(new iTextSharp.text.Chunk(footerLine));
+        document.Add(new iTextSharp.text.Paragraph(" "));
+
+        var footer = new iTextSharp.text.Paragraph("Generated by Chest X-Ray AI Analysis System | For clinical decision support only.", smallFont);
+        footer.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
+        document.Add(footer);
+
+        document.Close();
+        return ms.ToArray();
     }
 
     private iTextSharp.text.pdf.PdfPCell CreateInfoCell(string text, iTextSharp.text.Font font)
@@ -466,20 +496,5 @@ public class ReportService : IReportService
         cell.Border = iTextSharp.text.Rectangle.NO_BORDER;
         cell.PaddingTop = 5;
         return cell;
-    }
-
-    // Mock Data Fallback
-    private AiPredictionResult GetMockPrediction()
-    {
-        return new AiPredictionResult
-        {
-            Predictions = new List<PredictionItem>
-            {
-                new() { Pathology = "Atelectasis", Confidence = 0.85m, Detected = true },
-                new() { Pathology = "Effusion", Confidence = 0.25m, Detected = false },
-                new() { Pathology = "Pneumothorax", Confidence = 0.10m, Detected = false }
-            },
-            HeatmapBase64 = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
-        };
     }
 }

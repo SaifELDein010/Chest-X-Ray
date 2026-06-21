@@ -1,0 +1,406 @@
+2026-06-13 18:52:24.146 +03:00 [INF] User profile is available. Using 'C:\Users\lab\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-06-13 18:52:25.122 +03:00 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://127.0.0.1:5098: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+ ---> System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2026-06-13 18:54:06.528 +03:00 [INF] User profile is available. Using 'C:\Users\lab\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-06-13 18:54:06.695 +03:00 [INF] Now listening on: http://localhost:5098
+2026-06-13 18:54:06.703 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-13 18:54:06.707 +03:00 [INF] Hosting environment: Development
+2026-06-13 18:54:06.713 +03:00 [INF] Content root path: D:\Saif\New Style\Final_Project\Chest X-ray
+2026-06-13 19:08:54.128 +03:00 [INF] Request starting HTTP/1.1 GET http://pouncing-arise-cussed.ngrok-free.dev/swagger/index.html - null null
+2026-06-13 19:08:54.503 +03:00 [INF] Request finished HTTP/1.1 GET http://pouncing-arise-cussed.ngrok-free.dev/swagger/index.html - 200 null text/html;charset=utf-8 376.3018ms
+2026-06-13 19:08:55.298 +03:00 [INF] Request starting HTTP/1.1 GET http://pouncing-arise-cussed.ngrok-free.dev/swagger/v1/swagger.json - null null
+2026-06-13 19:08:55.801 +03:00 [INF] Request finished HTTP/1.1 GET http://pouncing-arise-cussed.ngrok-free.dev/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 504.5126ms
+2026-06-13 19:09:46.756 +03:00 [INF] Request starting HTTP/1.1 POST http://pouncing-arise-cussed.ngrok-free.dev/api/auth/login - application/json 66
+2026-06-13 19:09:46.923 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-06-13 19:09:47.083 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 19:09:47.177 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Chest_Xray.DTOs.LoginDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 19:09:53.501 +03:00 [INF] Executed DbCommand (129ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedAt], [u].[Email], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @dto_Email
+2026-06-13 19:09:55.204 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 19:09:55.367 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Login (Chest X-ray) in 8158.544ms
+2026-06-13 19:09:55.401 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 19:09:55.501 +03:00 [INF] Request finished HTTP/1.1 POST http://pouncing-arise-cussed.ngrok-free.dev/api/auth/login - 200 535 application/json; charset=utf-8 8744.859ms
+2026-06-13 19:11:39.319 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/index.html - null null
+2026-06-13 19:11:39.367 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/index.html - 200 null text/html;charset=utf-8 46.7477ms
+2026-06-13 19:14:41.132 +03:00 [INF] Request starting HTTP/1.1 POST http://pouncing-arise-cussed.ngrok-free.dev/api/reports - multipart/form-data; boundary=--------------------------594979337965739718628762 1699476
+2026-06-13 19:14:41.215 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 19:14:41.234 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 19:14:42.818 +03:00 [INF] Start processing HTTP request POST https://holmes-soccer-mls-transit.trycloudflare.com/api/predict
+2026-06-13 19:14:42.824 +03:00 [INF] Sending HTTP request POST https://holmes-soccer-mls-transit.trycloudflare.com/api/predict
+2026-06-13 19:14:43.073 +03:00 [INF] HTTP request failed after 239.4293ms
+System.Net.Http.HttpRequestException: No such host is known. (holmes-soccer-mls-transit.trycloudflare.com:443)
+ ---> System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.<SendAsync>g__CreateHandlerAndSendAsync|115_0(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+2026-06-13 19:14:43.092 +03:00 [INF] HTTP request failed after 274.8374ms
+System.Net.Http.HttpRequestException: No such host is known. (holmes-soccer-mls-transit.trycloudflare.com:443)
+ ---> System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.<SendAsync>g__CreateHandlerAndSendAsync|115_0(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+2026-06-13 19:14:43.119 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 1873.1302ms
+2026-06-13 19:14:43.124 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 19:14:43.128 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: No such host is known. (holmes-soccer-mls-transit.trycloudflare.com:443)
+ ---> System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.<SendAsync>g__CreateHandlerAndSendAsync|115_0(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chest_Xray.Services.AiPredictionService.PredictAsync(String base64Image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\AiPredictionService.cs:line 38
+   at Chest_Xray.Services.ReportService.UploadAndAnalyzeAsync(Int32 userId, IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\ReportService.cs:line 56
+   at Chest_Xray.Controllers.ReportsController.UploadAndAnalyze(IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Controllers\ReportsController.cs:line 33
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-06-13 19:14:43.186 +03:00 [INF] Request finished HTTP/1.1 POST http://pouncing-arise-cussed.ngrok-free.dev/api/reports - 500 null text/plain; charset=utf-8 2053.7422ms
+2026-06-13 19:14:56.176 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundarymDmcnpP120ecTOYi 12121
+2026-06-13 19:14:56.216 +03:00 [INF] CORS policy execution successful.
+2026-06-13 19:14:56.236 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 19:14:56.246 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 19:14:56.275 +03:00 [INF] Start processing HTTP request POST https://holmes-soccer-mls-transit.trycloudflare.com/api/predict
+2026-06-13 19:14:56.278 +03:00 [INF] Sending HTTP request POST https://holmes-soccer-mls-transit.trycloudflare.com/api/predict
+2026-06-13 19:14:56.291 +03:00 [INF] HTTP request failed after 10.1604ms
+System.Net.Http.HttpRequestException: No such host is known. (holmes-soccer-mls-transit.trycloudflare.com:443)
+ ---> System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+2026-06-13 19:14:56.311 +03:00 [INF] HTTP request failed after 36.2199ms
+System.Net.Http.HttpRequestException: No such host is known. (holmes-soccer-mls-transit.trycloudflare.com:443)
+ ---> System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+2026-06-13 19:14:56.337 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 82.1884ms
+2026-06-13 19:14:56.343 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 19:14:56.347 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: No such host is known. (holmes-soccer-mls-transit.trycloudflare.com:443)
+ ---> System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chest_Xray.Services.AiPredictionService.PredictAsync(String base64Image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\AiPredictionService.cs:line 38
+   at Chest_Xray.Services.ReportService.UploadAndAnalyzeAsync(Int32 userId, IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\ReportService.cs:line 56
+   at Chest_Xray.Controllers.ReportsController.UploadAndAnalyze(IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Controllers\ReportsController.cs:line 33
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-06-13 19:14:56.396 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 500 null text/plain; charset=utf-8 219.8826ms
+2026-06-13 19:18:32.396 +03:00 [INF] Application is shutting down...
+2026-06-13 19:19:02.343 +03:00 [INF] User profile is available. Using 'C:\Users\lab\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-06-13 19:19:02.518 +03:00 [INF] Now listening on: http://localhost:5098
+2026-06-13 19:19:02.527 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-13 19:19:02.531 +03:00 [INF] Hosting environment: Development
+2026-06-13 19:19:02.534 +03:00 [INF] Content root path: D:\Saif\New Style\Final_Project\Chest X-ray
+2026-06-13 19:19:06.699 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/index.html - null null
+2026-06-13 19:19:06.945 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/index.html - 200 null text/html;charset=utf-8 247.4093ms
+2026-06-13 19:19:07.296 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - null null
+2026-06-13 19:19:07.617 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 337.3045ms
+2026-06-13 19:19:20.604 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/auth/login - application/json-patch+json 59
+2026-06-13 19:19:20.664 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-06-13 19:19:20.667 +03:00 [INF] CORS policy execution successful.
+2026-06-13 19:19:20.730 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 19:19:20.772 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Chest_Xray.DTOs.LoginDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 19:19:23.124 +03:00 [INF] Executed DbCommand (76ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedAt], [u].[Email], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @dto_Email
+2026-06-13 19:19:23.644 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 19:19:23.712 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Login (Chest X-ray) in 2926.8745ms
+2026-06-13 19:19:23.724 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 19:19:23.927 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/auth/login - 200 535 application/json; charset=utf-8 3322.9392ms
+2026-06-13 19:19:38.589 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryIeLWjAcAM4fVA6XH 444834
+2026-06-13 19:19:38.644 +03:00 [INF] CORS policy execution successful.
+2026-06-13 19:19:38.747 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 19:19:38.764 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 19:19:38.875 +03:00 [INF] Start processing HTTP request POST https://atm-notices-most-variety.trycloudflare.com/api/predict
+2026-06-13 19:19:38.888 +03:00 [INF] Sending HTTP request POST https://atm-notices-most-variety.trycloudflare.com/api/predict
+2026-06-13 19:19:40.249 +03:00 [INF] Received HTTP response headers after 1350.0316ms - 502
+2026-06-13 19:19:40.263 +03:00 [INF] End processing HTTP request after 1389.9627ms - 502
+2026-06-13 19:19:40.293 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 1516.9056ms
+2026-06-13 19:19:40.318 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 19:19:40.338 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: AI Service Error (BadGateway): error code: 502
+   at Chest_Xray.Services.AiPredictionService.PredictAsync(String base64Image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\AiPredictionService.cs:line 43
+   at Chest_Xray.Services.ReportService.UploadAndAnalyzeAsync(Int32 userId, IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\ReportService.cs:line 56
+   at Chest_Xray.Controllers.ReportsController.UploadAndAnalyze(IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Controllers\ReportsController.cs:line 33
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-06-13 19:19:40.468 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 500 null text/plain; charset=utf-8 1878.7384ms
+2026-06-13 19:20:26.844 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryB6maIpDuzwyEhrW7 420613
+2026-06-13 19:20:26.919 +03:00 [INF] CORS policy execution successful.
+2026-06-13 19:20:26.962 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 19:20:26.979 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 19:20:27.103 +03:00 [INF] Start processing HTTP request POST https://atm-notices-most-variety.trycloudflare.com/api/predict
+2026-06-13 19:20:27.113 +03:00 [INF] Sending HTTP request POST https://atm-notices-most-variety.trycloudflare.com/api/predict
+2026-06-13 19:20:27.611 +03:00 [INF] Received HTTP response headers after 482.5934ms - 502
+2026-06-13 19:20:27.626 +03:00 [INF] End processing HTTP request after 523.2313ms - 502
+2026-06-13 19:20:27.632 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 589.6865ms
+2026-06-13 19:20:27.637 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 19:20:27.644 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: AI Service Error (BadGateway): error code: 502
+   at Chest_Xray.Services.AiPredictionService.PredictAsync(String base64Image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\AiPredictionService.cs:line 43
+   at Chest_Xray.Services.ReportService.UploadAndAnalyzeAsync(Int32 userId, IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\ReportService.cs:line 56
+   at Chest_Xray.Controllers.ReportsController.UploadAndAnalyze(IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Controllers\ReportsController.cs:line 33
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-06-13 19:20:27.697 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 500 null text/plain; charset=utf-8 852.8777ms
+2026-06-13 19:20:49.079 +03:00 [INF] Application is shutting down...
+2026-06-13 19:21:04.044 +03:00 [INF] User profile is available. Using 'C:\Users\lab\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-06-13 19:21:04.258 +03:00 [INF] Now listening on: http://localhost:5098
+2026-06-13 19:21:04.265 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-13 19:21:04.269 +03:00 [INF] Hosting environment: Development
+2026-06-13 19:21:04.273 +03:00 [INF] Content root path: D:\Saif\New Style\Final_Project\Chest X-ray
+2026-06-13 19:21:19.824 +03:00 [INF] Application is shutting down...
+2026-06-13 19:21:37.657 +03:00 [INF] User profile is available. Using 'C:\Users\lab\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-06-13 19:21:37.838 +03:00 [INF] Now listening on: http://localhost:5098
+2026-06-13 19:21:37.850 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-13 19:21:37.855 +03:00 [INF] Hosting environment: Development
+2026-06-13 19:21:37.863 +03:00 [INF] Content root path: D:\Saif\New Style\Final_Project\Chest X-ray
+2026-06-13 19:21:43.211 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/index.html - null null
+2026-06-13 19:21:43.443 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/index.html - 200 null text/html;charset=utf-8 233.0309ms
+2026-06-13 19:21:44.339 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - null null
+2026-06-13 19:21:44.898 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 561.4295ms
+2026-06-13 19:22:00.432 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/auth/login - application/json-patch+json 57
+2026-06-13 19:22:00.510 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-06-13 19:22:00.519 +03:00 [INF] CORS policy execution successful.
+2026-06-13 19:22:00.579 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 19:22:00.643 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Chest_Xray.DTOs.LoginDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 19:22:03.913 +03:00 [INF] Executed DbCommand (346ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedAt], [u].[Email], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @dto_Email
+2026-06-13 19:22:04.461 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 19:22:04.528 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Login (Chest X-ray) in 3859.6427ms
+2026-06-13 19:22:04.545 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 19:22:04.639 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/auth/login - 200 535 application/json; charset=utf-8 4206.835ms
+2026-06-13 19:22:19.014 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryUJovaEq8kC0o2H2V 444834
+2026-06-13 19:22:19.105 +03:00 [INF] CORS policy execution successful.
+2026-06-13 19:22:19.213 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 19:22:19.247 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 19:22:19.404 +03:00 [INF] Start processing HTTP request POST https://atm-notices-most-variety.trycloudflare.com/api/predict
+2026-06-13 19:22:19.409 +03:00 [INF] Sending HTTP request POST https://atm-notices-most-variety.trycloudflare.com/api/predict
+2026-06-13 19:22:22.107 +03:00 [INF] Received HTTP response headers after 2689.3567ms - 200
+2026-06-13 19:22:22.113 +03:00 [INF] End processing HTTP request after 2710.9386ms - 200
+2026-06-13 19:22:22.769 +03:00 [INF] Executed DbCommand (20ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Precision = 5) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Reports] ([CreatedAt], [HeatmapImagePath], [OriginalImagePath], [OverallConfidence], [PredictionsJson], [PrimaryDisease], [ReportName], [Status], [UserId])
+OUTPUT INSERTED.[ReportId]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-06-13 19:22:22.863 +03:00 [INF] Executing ObjectResult, writing value of type 'Chest_Xray.DTOs.ReportDto'.
+2026-06-13 19:22:22.957 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 3681.2376ms
+2026-06-13 19:22:22.993 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 19:22:24.257 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 201 477 application/json; charset=utf-8 5243.3673ms
+2026-06-13 19:22:53.031 +03:00 [INF] Request starting HTTP/1.1 POST http://pouncing-arise-cussed.ngrok-free.dev/api/reports - multipart/form-data; boundary=--------------------------362351444216956799321726 1699476
+2026-06-13 19:22:53.050 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 19:22:53.053 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 19:22:54.876 +03:00 [INF] Start processing HTTP request POST https://atm-notices-most-variety.trycloudflare.com/api/predict
+2026-06-13 19:22:54.882 +03:00 [INF] Sending HTTP request POST https://atm-notices-most-variety.trycloudflare.com/api/predict
+2026-06-13 19:22:57.424 +03:00 [INF] Received HTTP response headers after 2538.6519ms - 200
+2026-06-13 19:22:57.434 +03:00 [INF] End processing HTTP request after 2557.858ms - 200
+2026-06-13 19:22:57.711 +03:00 [INF] Executed DbCommand (24ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Precision = 5) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Reports] ([CreatedAt], [HeatmapImagePath], [OriginalImagePath], [OverallConfidence], [PredictionsJson], [PrimaryDisease], [ReportName], [Status], [UserId])
+OUTPUT INSERTED.[ReportId]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-06-13 19:22:57.721 +03:00 [INF] Executing ObjectResult, writing value of type 'Chest_Xray.DTOs.ReportDto'.
+2026-06-13 19:22:57.732 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 4668.7384ms
+2026-06-13 19:22:57.737 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 19:22:57.746 +03:00 [INF] Request finished HTTP/1.1 POST http://pouncing-arise-cussed.ngrok-free.dev/api/reports - 201 479 application/json; charset=utf-8 4715.4367ms
+2026-06-13 19:23:38.289 +03:00 [INF] Request starting HTTP/1.1 GET http://pouncing-arise-cussed.ngrok-free.dev/api/reports/28/heatmap-image - null null
+2026-06-13 19:23:38.302 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-06-13 19:23:38.313 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-06-13 19:23:38.317 +03:00 [INF] Request finished HTTP/1.1 GET http://pouncing-arise-cussed.ngrok-free.dev/api/reports/28/heatmap-image - 401 0 null 27.6426ms
+2026-06-13 19:23:43.612 +03:00 [INF] Request starting HTTP/1.1 GET http://pouncing-arise-cussed.ngrok-free.dev/api/reports/28/pdf - null null
+2026-06-13 19:23:43.628 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-06-13 19:23:43.632 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-06-13 19:23:43.636 +03:00 [INF] Request finished HTTP/1.1 GET http://pouncing-arise-cussed.ngrok-free.dev/api/reports/28/pdf - 401 0 null 23.4132ms
+2026-06-13 19:23:47.704 +03:00 [INF] Request starting HTTP/1.1 GET http://pouncing-arise-cussed.ngrok-free.dev/api/reports/28/original-image - null null
+2026-06-13 19:23:47.714 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-06-13 19:23:47.718 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-06-13 19:23:47.723 +03:00 [INF] Request finished HTTP/1.1 GET http://pouncing-arise-cussed.ngrok-free.dev/api/reports/28/original-image - 401 0 null 18.9295ms
+2026-06-13 19:26:13.015 +03:00 [INF] Request starting HTTP/1.1 GET http://pouncing-arise-cussed.ngrok-free.dev/api/reports/28/heatmap-image - null null
+2026-06-13 19:26:13.035 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.GetHeatmapImage (Chest X-ray)'
+2026-06-13 19:26:13.049 +03:00 [INF] Route matched with {action = "GetHeatmapImage", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetHeatmapImage(Int32) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 19:26:13.095 +03:00 [INF] Executed DbCommand (11ms) [Parameters=[@reportId='?' (DbType = Int32), @userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[ReportId], [r].[CreatedAt], [r].[HeatmapImagePath], [r].[OriginalImagePath], [r].[OverallConfidence], [r].[PredictionsJson], [r].[PrimaryDisease], [r].[ReportName], [r].[Status], [r].[UserId]
+FROM [Reports] AS [r]
+WHERE [r].[ReportId] = @reportId AND [r].[UserId] = @userId
+2026-06-13 19:26:13.111 +03:00 [INF] Executing FileContentResult, sending file with download name '' ...
+2026-06-13 19:26:13.136 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.GetHeatmapImage (Chest X-ray) in 80.3469ms
+2026-06-13 19:26:13.142 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.GetHeatmapImage (Chest X-ray)'
+2026-06-13 19:26:13.147 +03:00 [INF] Request finished HTTP/1.1 GET http://pouncing-arise-cussed.ngrok-free.dev/api/reports/28/heatmap-image - 200 138084 image/png 131.2368ms
+2026-06-13 19:26:54.478 +03:00 [INF] Request starting HTTP/1.1 GET http://pouncing-arise-cussed.ngrok-free.dev/api/reports/28/pdf - null null
+2026-06-13 19:26:54.494 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray)'
+2026-06-13 19:26:54.512 +03:00 [INF] Route matched with {action = "DownloadPdf", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] DownloadPdf(Int32) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 19:26:54.558 +03:00 [INF] Executed DbCommand (19ms) [Parameters=[@reportId='?' (DbType = Int32), @userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[ReportId], [r].[CreatedAt], [r].[HeatmapImagePath], [r].[OriginalImagePath], [r].[OverallConfidence], [r].[PredictionsJson], [r].[PrimaryDisease], [r].[ReportName], [r].[Status], [r].[UserId]
+FROM [Reports] AS [r]
+WHERE [r].[ReportId] = @reportId AND [r].[UserId] = @userId
+2026-06-13 19:26:55.679 +03:00 [INF] Executing FileContentResult, sending file with download name 'Report_20260613.pdf' ...
+2026-06-13 19:26:55.703 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray) in 1174.9276ms
+2026-06-13 19:26:55.706 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray)'
+2026-06-13 19:26:55.710 +03:00 [INF] Request finished HTTP/1.1 GET http://pouncing-arise-cussed.ngrok-free.dev/api/reports/28/pdf - 200 2777520 application/pdf 1231.5458ms
+2026-06-13 19:34:37.508 +03:00 [INF] Application is shutting down...

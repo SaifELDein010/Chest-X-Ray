@@ -9,15 +9,18 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Serilog Logging
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
     .CreateLogger();
 builder.Host.UseSerilog();
 
+// Database
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// JWT Authentication
 var jwtKey = builder.Configuration["Jwt:Key"] ?? throw new InvalidOperationException("JWT Key not found");
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -36,10 +39,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 
+// Register Services
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IReportService, ReportService>();
 builder.Services.AddHttpClient<IAiPredictionService, AiPredictionService>();
 
+// Controllers & Swagger
 builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -72,9 +77,10 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+// ========== CORS ==========
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", policy =>
+    options.AddDefaultPolicy(policy =>
     {
         policy.AllowAnyOrigin()
               .AllowAnyMethod()
@@ -84,6 +90,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+// Swagger UI
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
@@ -91,12 +98,15 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = "swagger";
 });
 
+// CORS must be before Authentication & Authorization
+app.UseCors();
+
 app.UseHttpsRedirection();
-app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
+// Create directories
 Directory.CreateDirectory("logs");
 Directory.CreateDirectory("wwwroot/uploads/originals");
 Directory.CreateDirectory("wwwroot/uploads/heatmaps");

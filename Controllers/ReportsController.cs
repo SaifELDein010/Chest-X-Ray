@@ -18,10 +18,10 @@ public class ReportsController : ControllerBase
         _reportService = reportService;
     }
 
-    private int GetUserId()
+    private Guid GetUserId()
     {
         var claim = User.FindFirst(ClaimTypes.NameIdentifier);
-        return int.Parse(claim!.Value);
+        return Guid.Parse(claim!.Value);
     }
 
     [HttpPost]
@@ -52,77 +52,119 @@ public class ReportsController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetReportById(int id)
+    public async Task<IActionResult> GetReportById(Guid id)
     {
-        var userId = GetUserId();
-        var result = await _reportService.GetReportByIdAsync(userId, id);
+        try
+        {
+            var userId = GetUserId();
+            var result = await _reportService.GetReportByIdAsync(userId, id);
 
-        if (result == null)
-            return NotFound(new { message = "Report not found" });
+            if (result == null)
+                return NotFound(new { message = "Report not found" });
 
-        return Ok(result);
+            return Ok(result);
+        }
+        catch (UnauthorizedAccessException)
+        {
+            return Unauthorized(new { message = "You are not authorized to access this report" });
+        }
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateReportName(int id, [FromBody] UpdateReportDto dto)
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> UpdateReportName(Guid id, [FromBody] UpdateReportDto dto)
     {
         if (string.IsNullOrWhiteSpace(dto.ReportName))
             return BadRequest(new { message = "Invalid update", errors = new { ReportName = new[] { "Report name is required" } } });
 
-        var userId = GetUserId();
-        var result = await _reportService.UpdateReportNameAsync(userId, id, dto.ReportName);
+        try
+        {
+            var userId = GetUserId();
+            var result = await _reportService.UpdateReportNameAsync(userId, id, dto.ReportName);
 
-        if (result == null)
-            return NotFound(new { message = "Report not found" });
+            if (result == null)
+                return NotFound(new { message = "Report not found" });
 
-        return Ok(new { message = "Report updated successfully", report = result });
+            return Ok(new { message = "Report updated successfully", report = result });
+        }
+        catch (UnauthorizedAccessException)
+        {
+            return Unauthorized(new { message = "You are not authorized to update this report" });
+        }
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteReport(int id)
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> DeleteReport(Guid id)
     {
-        var userId = GetUserId();
-        var result = await _reportService.DeleteReportAsync(userId, id);
+        try
+        {
+            var userId = GetUserId();
+            var result = await _reportService.DeleteReportAsync(userId, id);
 
-        if (!result)
-            return NotFound(new { message = "Report not found" });
+            if (!result)
+                return NotFound(new { message = "Report not found" });
 
-        return NoContent();
+            return NoContent();
+        }
+        catch (UnauthorizedAccessException)
+        {
+            return Unauthorized(new { message = "You are not authorized to delete this report" });
+        }
     }
 
-    [HttpGet("{id}/original-image")]
-    public async Task<IActionResult> GetOriginalImage(int id)
+    [HttpGet("{id:guid}/original-image")]
+    public async Task<IActionResult> GetOriginalImage(Guid id)
     {
-        var userId = GetUserId();
-        var imageBytes = await _reportService.GetOriginalImageAsync(userId, id);
+        try
+        {
+            var userId = GetUserId();
+            var imageBytes = await _reportService.GetOriginalImageAsync(userId, id);
 
-        if (imageBytes == null)
-            return NotFound(new { message = "Image not found" });
+            if (imageBytes == null)
+                return NotFound(new { message = "Image not found" });
 
-        return File(imageBytes, "image/png");
+            return File(imageBytes, "image/png");
+        }
+        catch (UnauthorizedAccessException)
+        {
+            return Unauthorized(new { message = "You are not authorized to view this image" });
+        }
     }
 
-    [HttpGet("{id}/heatmap-image")]
-    public async Task<IActionResult> GetHeatmapImage(int id)
+    [HttpGet("{id:guid}/heatmap-image")]
+    public async Task<IActionResult> GetHeatmapImage(Guid id)
     {
-        var userId = GetUserId();
-        var imageBytes = await _reportService.GetHeatmapImageAsync(userId, id);
+        try
+        {
+            var userId = GetUserId();
+            var imageBytes = await _reportService.GetHeatmapImageAsync(userId, id);
 
-        if (imageBytes == null)
-            return NotFound(new { message = "Image not found" });
+            if (imageBytes == null)
+                return NotFound(new { message = "Image not found" });
 
-        return File(imageBytes, "image/png");
+            return File(imageBytes, "image/png");
+        }
+        catch (UnauthorizedAccessException)
+        {
+            return Unauthorized(new { message = "You are not authorized to view this image" });
+        }
     }
 
-    [HttpGet("{id}/pdf")]
-    public async Task<IActionResult> DownloadPdf(int id)
+    [HttpGet("{id:guid}/pdf")]
+    public async Task<IActionResult> DownloadPdf(Guid id)
     {
-        var userId = GetUserId();
-        var pdfBytes = await _reportService.GeneratePdfAsync(userId, id);
+        try
+        {
+            var userId = GetUserId();
+            var pdfBytes = await _reportService.GeneratePdfAsync(userId, id);
 
-        if (pdfBytes == null)
-            return NotFound(new { message = "Report not found" });
+            if (pdfBytes == null)
+                return NotFound(new { message = "Report not found" });
 
-        return File(pdfBytes, "application/pdf", $"Report_{DateTime.UtcNow:yyyyMMdd}.pdf");
+            return File(pdfBytes, "application/pdf", $"Report_{DateTime.UtcNow:yyyyMMdd}.pdf");
+        }
+        catch (UnauthorizedAccessException)
+        {
+            return Unauthorized(new { message = "You are not authorized to download this report" });
+        }
     }
 }

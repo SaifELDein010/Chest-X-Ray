@@ -171,3 +171,1387 @@ WHERE [r].[ReportId] = @reportId AND [r].[UserId] = @userId
 2026-06-13 14:39:18.383 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray)'
 2026-06-13 14:39:18.390 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/api/reports/7/pdf - 200 595993 application/pdf 677.2498ms
 2026-06-13 14:41:43.108 +03:00 [INF] Application is shutting down...
+2026-06-13 17:27:13.801 +03:00 [INF] User profile is available. Using 'C:\Users\lab\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-06-13 17:27:14.000 +03:00 [INF] Now listening on: http://localhost:5098
+2026-06-13 17:27:14.009 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-13 17:27:14.017 +03:00 [INF] Hosting environment: Development
+2026-06-13 17:27:14.022 +03:00 [INF] Content root path: D:\Saif\New Style\Final_Project\Chest X-ray
+2026-06-13 17:27:22.211 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/index.html - null null
+2026-06-13 17:27:22.368 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/index.html - 200 null text/html;charset=utf-8 159.811ms
+2026-06-13 17:27:22.543 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - null null
+2026-06-13 17:27:23.187 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 643.6064ms
+2026-06-13 17:27:40.444 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/auth/login - application/json-patch+json 59
+2026-06-13 17:27:40.532 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-06-13 17:27:40.563 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:27:43.628 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 17:27:43.689 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Chest_Xray.DTOs.LoginDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 17:27:48.455 +03:00 [INF] Executed DbCommand (169ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedAt], [u].[Email], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @dto_Email
+2026-06-13 17:27:48.990 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 17:27:49.059 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Login (Chest X-ray) in 5344.9635ms
+2026-06-13 17:27:49.075 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 17:27:49.113 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/auth/login - 200 535 application/json; charset=utf-8 8668.6494ms
+2026-06-13 17:28:09.634 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryJsayEtwjRlpJh10H 444834
+2026-06-13 17:28:09.742 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:28:09.802 +03:00 [INF] Failed to validate the token.
+System.ArgumentException: IDX14102: Unable to decode the header '[PII of type 'Microsoft.IdentityModel.Logging.SecurityArtifact' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]' as Base64Url encoded string.
+ ---> System.FormatException: IDX10400: Unable to decode: '[PII of type 'System.String' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]' as Base64url encoded string.
+   at Microsoft.IdentityModel.Tokens.Base64UrlEncoder.Decode(ReadOnlySpan`1 strSpan, Span`1 output, Boolean needReplace, Int32 decodedLength)
+   at Microsoft.IdentityModel.Tokens.Base64UrlEncoder.Decode(ReadOnlySpan`1 strSpan, Span`1 output)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken.CreateClaimSet(ReadOnlySpan`1 strSpan, Int32 startIndex, Int32 length, Boolean createHeaderClaimSet)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken.ReadToken(ReadOnlyMemory`1 encodedTokenMemory)
+   --- End of inner exception stack trace ---
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken.ReadToken(ReadOnlyMemory`1 encodedTokenMemory)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken..ctor(String jwtEncodedString)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ReadToken(String token, TokenValidationParameters validationParameters)
+2026-06-13 17:28:09.861 +03:00 [INF] Bearer was not authenticated. Failure message: IDX14102: Unable to decode the header '[PII of type 'Microsoft.IdentityModel.Logging.SecurityArtifact' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]' as Base64Url encoded string.
+2026-06-13 17:28:09.880 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-06-13 17:28:09.932 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-06-13 17:28:09.942 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 401 0 null 308.3416ms
+2026-06-13 17:28:44.801 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundary6tSW6yApN7oRg6bQ 420613
+2026-06-13 17:28:44.838 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:28:44.855 +03:00 [INF] Failed to validate the token.
+System.ArgumentException: IDX14102: Unable to decode the header '[PII of type 'Microsoft.IdentityModel.Logging.SecurityArtifact' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]' as Base64Url encoded string.
+ ---> System.FormatException: IDX10400: Unable to decode: '[PII of type 'System.String' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]' as Base64url encoded string.
+   at Microsoft.IdentityModel.Tokens.Base64UrlEncoder.Decode(ReadOnlySpan`1 strSpan, Span`1 output, Boolean needReplace, Int32 decodedLength)
+   at Microsoft.IdentityModel.Tokens.Base64UrlEncoder.Decode(ReadOnlySpan`1 strSpan, Span`1 output)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken.CreateClaimSet(ReadOnlySpan`1 strSpan, Int32 startIndex, Int32 length, Boolean createHeaderClaimSet)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken.ReadToken(ReadOnlyMemory`1 encodedTokenMemory)
+   --- End of inner exception stack trace ---
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken.ReadToken(ReadOnlyMemory`1 encodedTokenMemory)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken..ctor(String jwtEncodedString)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ReadToken(String token, TokenValidationParameters validationParameters)
+2026-06-13 17:28:44.865 +03:00 [INF] Bearer was not authenticated. Failure message: IDX14102: Unable to decode the header '[PII of type 'Microsoft.IdentityModel.Logging.SecurityArtifact' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]' as Base64Url encoded string.
+2026-06-13 17:28:44.870 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-06-13 17:28:44.873 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-06-13 17:28:44.900 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 401 0 null 99.3498ms
+2026-06-13 17:29:08.203 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/auth/login - application/json-patch+json 57
+2026-06-13 17:29:08.250 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:29:08.260 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 17:29:08.283 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Chest_Xray.DTOs.LoginDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 17:29:08.383 +03:00 [INF] Executed DbCommand (19ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedAt], [u].[Email], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @dto_Email
+2026-06-13 17:29:08.652 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 17:29:08.662 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Login (Chest X-ray) in 362.1637ms
+2026-06-13 17:29:08.676 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 17:29:08.699 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/auth/login - 200 535 application/json; charset=utf-8 495.6984ms
+2026-06-13 17:29:11.208 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/auth/login - application/json-patch+json 57
+2026-06-13 17:29:11.265 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:29:11.276 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 17:29:11.291 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Chest_Xray.DTOs.LoginDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 17:29:11.435 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedAt], [u].[Email], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @dto_Email
+2026-06-13 17:29:11.651 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 17:29:11.660 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Login (Chest X-ray) in 359.8278ms
+2026-06-13 17:29:11.672 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 17:29:11.693 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/auth/login - 200 535 application/json; charset=utf-8 484.7928ms
+2026-06-13 17:29:34.586 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundary4lRNTA2iwty6A7N9 444834
+2026-06-13 17:29:34.641 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:29:34.646 +03:00 [INF] Failed to validate the token.
+System.ArgumentException: IDX14102: Unable to decode the header '[PII of type 'Microsoft.IdentityModel.Logging.SecurityArtifact' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]' as Base64Url encoded string.
+ ---> System.FormatException: IDX10400: Unable to decode: '[PII of type 'System.String' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]' as Base64url encoded string.
+   at Microsoft.IdentityModel.Tokens.Base64UrlEncoder.Decode(ReadOnlySpan`1 strSpan, Span`1 output, Boolean needReplace, Int32 decodedLength)
+   at Microsoft.IdentityModel.Tokens.Base64UrlEncoder.Decode(ReadOnlySpan`1 strSpan, Span`1 output)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken.CreateClaimSet(ReadOnlySpan`1 strSpan, Int32 startIndex, Int32 length, Boolean createHeaderClaimSet)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken.ReadToken(ReadOnlyMemory`1 encodedTokenMemory)
+   --- End of inner exception stack trace ---
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken.ReadToken(ReadOnlyMemory`1 encodedTokenMemory)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken..ctor(String jwtEncodedString)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ReadToken(String token, TokenValidationParameters validationParameters)
+2026-06-13 17:29:34.697 +03:00 [INF] Bearer was not authenticated. Failure message: IDX14102: Unable to decode the header '[PII of type 'Microsoft.IdentityModel.Logging.SecurityArtifact' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]' as Base64Url encoded string.
+2026-06-13 17:29:34.734 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-06-13 17:29:34.744 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-06-13 17:29:34.762 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 401 0 null 175.4178ms
+2026-06-13 17:29:55.299 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryHggLPpnvDT2TmFMS 444834
+2026-06-13 17:29:55.339 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:29:55.342 +03:00 [INF] Failed to validate the token.
+System.ArgumentException: IDX14102: Unable to decode the header '[PII of type 'Microsoft.IdentityModel.Logging.SecurityArtifact' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]' as Base64Url encoded string.
+ ---> System.FormatException: IDX10400: Unable to decode: '[PII of type 'System.String' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]' as Base64url encoded string.
+   at Microsoft.IdentityModel.Tokens.Base64UrlEncoder.Decode(ReadOnlySpan`1 strSpan, Span`1 output, Boolean needReplace, Int32 decodedLength)
+   at Microsoft.IdentityModel.Tokens.Base64UrlEncoder.Decode(ReadOnlySpan`1 strSpan, Span`1 output)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken.CreateClaimSet(ReadOnlySpan`1 strSpan, Int32 startIndex, Int32 length, Boolean createHeaderClaimSet)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken.ReadToken(ReadOnlyMemory`1 encodedTokenMemory)
+   --- End of inner exception stack trace ---
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken.ReadToken(ReadOnlyMemory`1 encodedTokenMemory)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken..ctor(String jwtEncodedString)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ReadToken(String token, TokenValidationParameters validationParameters)
+2026-06-13 17:29:55.403 +03:00 [INF] Bearer was not authenticated. Failure message: IDX14102: Unable to decode the header '[PII of type 'Microsoft.IdentityModel.Logging.SecurityArtifact' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]' as Base64Url encoded string.
+2026-06-13 17:29:55.410 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-06-13 17:29:55.425 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-06-13 17:29:55.436 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 401 0 null 137.5194ms
+2026-06-13 17:30:03.544 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryQenReiFo7h8wKb8Y 444834
+2026-06-13 17:30:03.592 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:30:03.680 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:30:03.706 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 17:30:03.826 +03:00 [INF] Start processing HTTP request POST https://cameron-commentary-monsters-labels.trycloudflare.com/
+2026-06-13 17:30:03.834 +03:00 [INF] Sending HTTP request POST https://cameron-commentary-monsters-labels.trycloudflare.com/
+2026-06-13 17:30:05.320 +03:00 [INF] Received HTTP response headers after 1471.0039ms - 530
+2026-06-13 17:30:05.341 +03:00 [INF] End processing HTTP request after 1515.2803ms - 530
+2026-06-13 17:30:05.463 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 1739.6052ms
+2026-06-13 17:30:05.472 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:30:05.476 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: AI Service Error (530): error code: 1033
+   at Chest_Xray.Services.AiPredictionService.PredictAsync(String base64Image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\AiPredictionService.cs:line 43
+   at Chest_Xray.Services.ReportService.UploadAndAnalyzeAsync(Int32 userId, IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\ReportService.cs:line 56
+   at Chest_Xray.Controllers.ReportsController.UploadAndAnalyze(IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Controllers\ReportsController.cs:line 33
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-06-13 17:30:05.603 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 500 null text/plain; charset=utf-8 2059.9301ms
+2026-06-13 17:30:36.322 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/auth/login - application/json-patch+json 59
+2026-06-13 17:30:36.375 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:30:36.394 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 17:30:36.399 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Chest_Xray.DTOs.LoginDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 17:30:36.442 +03:00 [INF] Executed DbCommand (16ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedAt], [u].[Email], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @dto_Email
+2026-06-13 17:30:36.705 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 17:30:36.731 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Login (Chest X-ray) in 315.4404ms
+2026-06-13 17:30:36.751 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 17:30:36.766 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/auth/login - 200 535 application/json; charset=utf-8 444.4335ms
+2026-06-13 17:31:07.097 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/api/reports/7/pdf - null null
+2026-06-13 17:31:07.172 +03:00 [INF] Failed to validate the token.
+System.ArgumentException: IDX14102: Unable to decode the header '[PII of type 'Microsoft.IdentityModel.Logging.SecurityArtifact' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]' as Base64Url encoded string.
+ ---> System.FormatException: IDX10400: Unable to decode: '[PII of type 'System.String' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]' as Base64url encoded string.
+   at Microsoft.IdentityModel.Tokens.Base64UrlEncoder.Decode(ReadOnlySpan`1 strSpan, Span`1 output, Boolean needReplace, Int32 decodedLength)
+   at Microsoft.IdentityModel.Tokens.Base64UrlEncoder.Decode(ReadOnlySpan`1 strSpan, Span`1 output)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken.CreateClaimSet(ReadOnlySpan`1 strSpan, Int32 startIndex, Int32 length, Boolean createHeaderClaimSet)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken.ReadToken(ReadOnlyMemory`1 encodedTokenMemory)
+   --- End of inner exception stack trace ---
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken.ReadToken(ReadOnlyMemory`1 encodedTokenMemory)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken..ctor(String jwtEncodedString)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ReadToken(String token, TokenValidationParameters validationParameters)
+2026-06-13 17:31:07.212 +03:00 [INF] Bearer was not authenticated. Failure message: IDX14102: Unable to decode the header '[PII of type 'Microsoft.IdentityModel.Logging.SecurityArtifact' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]' as Base64Url encoded string.
+2026-06-13 17:31:07.235 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-06-13 17:31:07.241 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-06-13 17:31:07.260 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/api/reports/7/pdf - 401 0 null 162.8415ms
+2026-06-13 17:31:18.033 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/api/reports/7/pdf - null null
+2026-06-13 17:31:18.103 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray)'
+2026-06-13 17:31:18.136 +03:00 [INF] Route matched with {action = "DownloadPdf", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] DownloadPdf(Int32) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 17:31:18.225 +03:00 [INF] Executed DbCommand (22ms) [Parameters=[@reportId='?' (DbType = Int32), @userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[ReportId], [r].[CreatedAt], [r].[HeatmapImagePath], [r].[OriginalImagePath], [r].[OverallConfidence], [r].[PredictionsJson], [r].[PrimaryDisease], [r].[ReportName], [r].[Status], [r].[UserId]
+FROM [Reports] AS [r]
+WHERE [r].[ReportId] = @reportId AND [r].[UserId] = @userId
+2026-06-13 17:31:19.412 +03:00 [INF] Executing FileContentResult, sending file with download name 'Report_20260613.pdf' ...
+2026-06-13 17:31:19.446 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray) in 1302.0678ms
+2026-06-13 17:31:19.457 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray)'
+2026-06-13 17:31:19.462 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/api/reports/7/pdf - 200 595993 application/pdf 1428.4449ms
+2026-06-13 17:32:12.110 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryMYVA0W9GHhAoIoRC 387621
+2026-06-13 17:32:12.213 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:32:12.217 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:32:12.227 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 17:32:12.281 +03:00 [INF] Start processing HTTP request POST https://cameron-commentary-monsters-labels.trycloudflare.com/
+2026-06-13 17:32:12.295 +03:00 [INF] Sending HTTP request POST https://cameron-commentary-monsters-labels.trycloudflare.com/
+2026-06-13 17:32:13.405 +03:00 [INF] Received HTTP response headers after 1088.1898ms - 530
+2026-06-13 17:32:13.413 +03:00 [INF] End processing HTTP request after 1131.8727ms - 530
+2026-06-13 17:32:13.420 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 1172.9536ms
+2026-06-13 17:32:13.426 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:32:13.443 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: AI Service Error (530): error code: 1033
+   at Chest_Xray.Services.AiPredictionService.PredictAsync(String base64Image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\AiPredictionService.cs:line 43
+   at Chest_Xray.Services.ReportService.UploadAndAnalyzeAsync(Int32 userId, IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\ReportService.cs:line 56
+   at Chest_Xray.Controllers.ReportsController.UploadAndAnalyze(IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Controllers\ReportsController.cs:line 33
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-06-13 17:32:13.479 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 500 null text/plain; charset=utf-8 1369.1645ms
+2026-06-13 17:33:43.341 +03:00 [INF] Application is shutting down...
+2026-06-13 17:34:04.542 +03:00 [INF] User profile is available. Using 'C:\Users\lab\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-06-13 17:34:04.725 +03:00 [INF] Now listening on: http://localhost:5098
+2026-06-13 17:34:04.740 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-13 17:34:04.743 +03:00 [INF] Hosting environment: Development
+2026-06-13 17:34:04.745 +03:00 [INF] Content root path: D:\Saif\New Style\Final_Project\Chest X-ray
+2026-06-13 17:34:10.395 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/index.html - null null
+2026-06-13 17:34:10.611 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/index.html - 200 null text/html;charset=utf-8 217.4558ms
+2026-06-13 17:34:11.373 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - null null
+2026-06-13 17:34:11.796 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 451.0752ms
+2026-06-13 17:34:25.680 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/auth/login - application/json-patch+json 59
+2026-06-13 17:34:25.756 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-06-13 17:34:25.790 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:34:25.914 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 17:34:25.992 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Chest_Xray.DTOs.LoginDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 17:34:28.615 +03:00 [INF] Executed DbCommand (80ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedAt], [u].[Email], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @dto_Email
+2026-06-13 17:34:29.096 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 17:34:29.192 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Login (Chest X-ray) in 3071.0561ms
+2026-06-13 17:34:30.474 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 17:34:30.495 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/auth/login - 200 535 application/json; charset=utf-8 4814.2804ms
+2026-06-13 17:34:44.261 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryoQQfGhnI8BIjhhkb 387621
+2026-06-13 17:34:44.326 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:34:44.481 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:34:44.540 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 17:34:44.687 +03:00 [INF] Start processing HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/
+2026-06-13 17:34:44.707 +03:00 [INF] Sending HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/
+2026-06-13 17:34:46.305 +03:00 [INF] Received HTTP response headers after 1577.7209ms - 405
+2026-06-13 17:34:46.313 +03:00 [INF] End processing HTTP request after 1626.8699ms - 405
+2026-06-13 17:34:46.322 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 1767.5302ms
+2026-06-13 17:34:46.344 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:34:46.351 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: AI Service Error (MethodNotAllowed): {"detail":"Method Not Allowed"}
+   at Chest_Xray.Services.AiPredictionService.PredictAsync(String base64Image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\AiPredictionService.cs:line 43
+   at Chest_Xray.Services.ReportService.UploadAndAnalyzeAsync(Int32 userId, IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\ReportService.cs:line 56
+   at Chest_Xray.Controllers.ReportsController.UploadAndAnalyze(IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Controllers\ReportsController.cs:line 33
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-06-13 17:34:46.416 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 500 null text/plain; charset=utf-8 2155.3199ms
+2026-06-13 17:35:05.384 +03:00 [INF] Application is shutting down...
+2026-06-13 17:35:55.330 +03:00 [INF] User profile is available. Using 'C:\Users\lab\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-06-13 17:35:56.248 +03:00 [INF] Now listening on: https://localhost:7201
+2026-06-13 17:35:56.252 +03:00 [INF] Now listening on: http://localhost:5098
+2026-06-13 17:35:56.775 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-13 17:35:56.777 +03:00 [INF] Hosting environment: Development
+2026-06-13 17:35:56.792 +03:00 [INF] Content root path: D:\Saif\New Style\Final_Project\Chest X-ray
+2026-06-13 17:36:07.314 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/index.html - null null
+2026-06-13 17:36:08.752 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/index.html - 200 null text/html;charset=utf-8 1468.9646ms
+2026-06-13 17:36:09.051 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/_framework/aspnetcore-browser-refresh.js - null null
+2026-06-13 17:36:09.051 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/_vs/browserLink - null null
+2026-06-13 17:36:09.083 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/_framework/aspnetcore-browser-refresh.js - 200 14927 application/javascript; charset=utf-8 31.3702ms
+2026-06-13 17:36:09.520 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/_vs/browserLink - 200 null text/javascript; charset=UTF-8 468.8605ms
+2026-06-13 17:36:09.626 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - null null
+2026-06-13 17:36:09.720 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 94.091ms
+2026-06-13 17:36:27.072 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/auth/login - application/json-patch+json 59
+2026-06-13 17:36:27.103 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/auth/login - 307 0 null 30.7671ms
+2026-06-13 17:36:27.349 +03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7201/api/auth/login - null null
+2026-06-13 17:36:27.373 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:36:27.381 +03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7201/api/auth/login - 204 null null 31.3408ms
+2026-06-13 17:36:27.402 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7201/api/auth/login - application/json-patch+json 59
+2026-06-13 17:36:27.411 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:36:27.611 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 17:36:27.705 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Chest_Xray.DTOs.LoginDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 17:36:32.421 +03:00 [INF] Executed DbCommand (246ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedAt], [u].[Email], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @dto_Email
+2026-06-13 17:36:33.552 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 17:36:33.651 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Login (Chest X-ray) in 5936.1114ms
+2026-06-13 17:36:33.660 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 17:36:33.684 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7201/api/auth/login - 200 535 application/json; charset=utf-8 6281.6229ms
+2026-06-13 17:36:52.646 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryeUbMJussxJuvLiEG 390298
+2026-06-13 17:36:52.694 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 307 0 null 45.9316ms
+2026-06-13 17:36:52.747 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7201/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryeUbMJussxJuvLiEG 390298
+2026-06-13 17:36:52.915 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:36:53.006 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-06-13 17:36:53.078 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-06-13 17:36:53.080 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7201/api/reports - 401 0 null 333.727ms
+2026-06-13 17:37:25.369 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/api/reports/7/pdf - null null
+2026-06-13 17:37:25.382 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/api/reports/7/pdf - 307 0 null 13.2424ms
+2026-06-13 17:37:25.401 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7201/api/reports/7/pdf - null null
+2026-06-13 17:37:25.416 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:37:25.435 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-06-13 17:37:25.438 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-06-13 17:37:25.439 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7201/api/reports/7/pdf - 401 0 null 39.2371ms
+2026-06-13 17:38:23.430 +03:00 [INF] User profile is available. Using 'C:\Users\lab\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-06-13 17:38:23.671 +03:00 [INF] Now listening on: http://localhost:5098
+2026-06-13 17:38:23.710 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-13 17:38:23.713 +03:00 [INF] Hosting environment: Development
+2026-06-13 17:38:23.719 +03:00 [INF] Content root path: D:\Saif\New Style\Final_Project\Chest X-ray
+2026-06-13 17:38:29.891 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/index.html - null null
+2026-06-13 17:38:30.991 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/index.html - 200 null text/html;charset=utf-8 1103.3001ms
+2026-06-13 17:38:31.856 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - null null
+2026-06-13 17:38:32.543 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 692.4044ms
+2026-06-13 17:38:47.040 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/auth/login - application/json-patch+json 59
+2026-06-13 17:38:47.143 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-06-13 17:38:47.155 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:38:47.260 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 17:38:47.383 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Chest_Xray.DTOs.LoginDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 17:38:50.780 +03:00 [INF] Executed DbCommand (75ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedAt], [u].[Email], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @dto_Email
+2026-06-13 17:38:51.424 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 17:38:51.512 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Login (Chest X-ray) in 4092.4958ms
+2026-06-13 17:38:51.952 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 17:38:51.988 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/auth/login - 200 534 application/json; charset=utf-8 4946.9809ms
+2026-06-13 17:39:06.356 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryifTQGk3UbeBYCbyH 457791
+2026-06-13 17:39:06.438 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:39:06.687 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:39:07.245 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 17:39:07.381 +03:00 [INF] Start processing HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/
+2026-06-13 17:39:07.389 +03:00 [INF] Sending HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/
+2026-06-13 17:39:08.987 +03:00 [INF] Received HTTP response headers after 1576.6332ms - 405
+2026-06-13 17:39:09.004 +03:00 [INF] End processing HTTP request after 1624.3086ms - 405
+2026-06-13 17:39:09.020 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 1765.4943ms
+2026-06-13 17:39:09.030 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:39:09.045 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: AI Service Error (MethodNotAllowed): {"detail":"Method Not Allowed"}
+   at Chest_Xray.Services.AiPredictionService.PredictAsync(String base64Image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\AiPredictionService.cs:line 43
+   at Chest_Xray.Services.ReportService.UploadAndAnalyzeAsync(Int32 userId, IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\ReportService.cs:line 56
+   at Chest_Xray.Controllers.ReportsController.UploadAndAnalyze(IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Controllers\ReportsController.cs:line 33
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-06-13 17:39:09.143 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 500 null text/plain; charset=utf-8 2786.5821ms
+2026-06-13 17:40:31.623 +03:00 [INF] Application is shutting down...
+2026-06-13 17:43:25.286 +03:00 [INF] User profile is available. Using 'C:\Users\lab\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-06-13 17:43:25.521 +03:00 [INF] Now listening on: http://localhost:5098
+2026-06-13 17:43:25.535 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-13 17:43:25.544 +03:00 [INF] Hosting environment: Development
+2026-06-13 17:43:25.551 +03:00 [INF] Content root path: D:\Saif\New Style\Final_Project\Chest X-ray
+2026-06-13 17:43:30.281 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/index.html - null null
+2026-06-13 17:43:30.695 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/index.html - 200 null text/html;charset=utf-8 423.4054ms
+2026-06-13 17:43:31.144 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - null null
+2026-06-13 17:43:31.589 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 452.3175ms
+2026-06-13 17:43:46.550 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/auth/login - application/json-patch+json 59
+2026-06-13 17:43:46.629 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-06-13 17:43:46.635 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:43:46.723 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 17:43:46.782 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Chest_Xray.DTOs.LoginDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 17:43:49.970 +03:00 [INF] Executed DbCommand (74ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedAt], [u].[Email], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @dto_Email
+2026-06-13 17:43:50.961 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 17:43:51.033 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Login (Chest X-ray) in 4233.2545ms
+2026-06-13 17:43:51.055 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 17:43:51.117 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/auth/login - 200 535 application/json; charset=utf-8 4566.8073ms
+2026-06-13 17:44:11.186 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryIyNw8W8fQ7OQkpQk 437739
+2026-06-13 17:44:11.363 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:44:11.496 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:44:11.531 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 17:44:11.928 +03:00 [INF] Start processing HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/api/predict
+2026-06-13 17:44:11.947 +03:00 [INF] Sending HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/api/predict
+2026-06-13 17:44:15.027 +03:00 [INF] Received HTTP response headers after 3062.2512ms - 200
+2026-06-13 17:44:15.037 +03:00 [INF] End processing HTTP request after 3110.1863ms - 200
+2026-06-13 17:44:15.790 +03:00 [INF] Executed DbCommand (33ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Precision = 5) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Reports] ([CreatedAt], [HeatmapImagePath], [OriginalImagePath], [OverallConfidence], [PredictionsJson], [PrimaryDisease], [ReportName], [Status], [UserId])
+OUTPUT INSERTED.[ReportId]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-06-13 17:44:15.956 +03:00 [INF] Executing ObjectResult, writing value of type 'Chest_Xray.DTOs.ReportDto'.
+2026-06-13 17:44:16.021 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 4459.904ms
+2026-06-13 17:44:16.024 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:44:16.481 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 201 479 application/json; charset=utf-8 5305.8271ms
+2026-06-13 17:44:34.876 +03:00 [INF] Application is shutting down...
+2026-06-13 17:45:06.579 +03:00 [INF] User profile is available. Using 'C:\Users\lab\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-06-13 17:45:06.776 +03:00 [INF] Now listening on: http://localhost:5098
+2026-06-13 17:45:06.798 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-13 17:45:06.803 +03:00 [INF] Hosting environment: Development
+2026-06-13 17:45:06.821 +03:00 [INF] Content root path: D:\Saif\New Style\Final_Project\Chest X-ray
+2026-06-13 17:45:09.900 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/index.html - null null
+2026-06-13 17:45:10.536 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/index.html - 200 null text/html;charset=utf-8 641.4557ms
+2026-06-13 17:45:11.271 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - null null
+2026-06-13 17:45:11.683 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 414.79ms
+2026-06-13 17:45:24.529 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/auth/login - application/json-patch+json 59
+2026-06-13 17:45:24.626 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-06-13 17:45:24.631 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:45:24.705 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 17:45:24.766 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Chest_Xray.DTOs.LoginDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 17:45:28.267 +03:00 [INF] Executed DbCommand (245ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedAt], [u].[Email], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @dto_Email
+2026-06-13 17:45:28.893 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 17:45:29.062 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Login (Chest X-ray) in 4236.0396ms
+2026-06-13 17:45:29.090 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 17:45:29.556 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/auth/login - 200 535 application/json; charset=utf-8 5027.0539ms
+2026-06-13 17:45:45.431 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryR7M5uqKJwMzCyRPN 420613
+2026-06-13 17:45:45.486 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:45:45.691 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:45:45.715 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 17:45:45.816 +03:00 [INF] Start processing HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/api/predict
+2026-06-13 17:45:45.824 +03:00 [INF] Sending HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/api/predict
+2026-06-13 17:45:48.424 +03:00 [INF] Received HTTP response headers after 2590.3098ms - 200
+2026-06-13 17:45:48.435 +03:00 [INF] End processing HTTP request after 2621.5586ms - 200
+2026-06-13 17:45:48.963 +03:00 [INF] Executed DbCommand (28ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Precision = 5) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Reports] ([CreatedAt], [HeatmapImagePath], [OriginalImagePath], [OverallConfidence], [PredictionsJson], [PrimaryDisease], [ReportName], [Status], [UserId])
+OUTPUT INSERTED.[ReportId]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-06-13 17:45:49.191 +03:00 [INF] Executing ObjectResult, writing value of type 'Chest_Xray.DTOs.ReportDto'.
+2026-06-13 17:45:49.231 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 3506.7869ms
+2026-06-13 17:45:49.725 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:45:49.987 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 201 468 application/json; charset=utf-8 4543.1482ms
+2026-06-13 17:45:59.367 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/index.html - null null
+2026-06-13 17:45:59.425 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/index.html - 200 null text/html;charset=utf-8 58.6062ms
+2026-06-13 17:46:00.123 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - null null
+2026-06-13 17:46:00.194 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 71.405ms
+2026-06-13 17:46:14.162 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/auth/login - application/json-patch+json 59
+2026-06-13 17:46:14.256 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:46:14.284 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 17:46:14.288 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Chest_Xray.DTOs.LoginDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 17:46:14.532 +03:00 [INF] Executed DbCommand (15ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedAt], [u].[Email], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @dto_Email
+2026-06-13 17:46:14.831 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 17:46:14.841 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Login (Chest X-ray) in 543.7899ms
+2026-06-13 17:46:14.882 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 17:46:14.924 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/auth/login - 200 535 application/json; charset=utf-8 761.5245ms
+2026-06-13 17:46:30.554 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryqOyLr5jGmMlzlM4n 457791
+2026-06-13 17:46:30.633 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:46:30.661 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:46:30.667 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 17:46:30.731 +03:00 [INF] Start processing HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/api/predict
+2026-06-13 17:46:30.737 +03:00 [INF] Sending HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/api/predict
+2026-06-13 17:46:32.163 +03:00 [INF] Received HTTP response headers after 1409.0596ms - 200
+2026-06-13 17:46:32.169 +03:00 [INF] End processing HTTP request after 1437.5657ms - 200
+2026-06-13 17:46:32.385 +03:00 [INF] Executed DbCommand (23ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Precision = 5) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Reports] ([CreatedAt], [HeatmapImagePath], [OriginalImagePath], [OverallConfidence], [PredictionsJson], [PrimaryDisease], [ReportName], [Status], [UserId])
+OUTPUT INSERTED.[ReportId]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-06-13 17:46:32.404 +03:00 [INF] Executing ObjectResult, writing value of type 'Chest_Xray.DTOs.ReportDto'.
+2026-06-13 17:46:32.418 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 1723.9803ms
+2026-06-13 17:46:32.426 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:46:32.434 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 201 478 application/json; charset=utf-8 1880.2738ms
+2026-06-13 17:47:46.411 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundary1s3hBT3UCO0a8Y42 115156
+2026-06-13 17:47:46.433 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:47:46.488 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:47:46.500 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 17:47:46.528 +03:00 [INF] Start processing HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/api/predict
+2026-06-13 17:47:46.533 +03:00 [INF] Sending HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/api/predict
+2026-06-13 17:47:48.112 +03:00 [INF] Received HTTP response headers after 1566.2847ms - 200
+2026-06-13 17:47:48.117 +03:00 [INF] End processing HTTP request after 1589.4456ms - 200
+2026-06-13 17:47:48.357 +03:00 [INF] Executed DbCommand (25ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Precision = 5) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Reports] ([CreatedAt], [HeatmapImagePath], [OriginalImagePath], [OverallConfidence], [PredictionsJson], [PrimaryDisease], [ReportName], [Status], [UserId])
+OUTPUT INSERTED.[ReportId]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-06-13 17:47:48.368 +03:00 [INF] Executing ObjectResult, writing value of type 'Chest_Xray.DTOs.ReportDto'.
+2026-06-13 17:47:48.381 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 1863.5484ms
+2026-06-13 17:47:48.389 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:47:48.400 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 201 468 application/json; charset=utf-8 1989.0223ms
+2026-06-13 17:47:58.816 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryAhVcYOwKwz6e0aqA 390298
+2026-06-13 17:47:58.935 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:47:58.955 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:47:58.963 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 17:47:58.995 +03:00 [INF] Start processing HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/api/predict
+2026-06-13 17:47:59.002 +03:00 [INF] Sending HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/api/predict
+2026-06-13 17:48:00.624 +03:00 [INF] Received HTTP response headers after 1604.979ms - 200
+2026-06-13 17:48:00.631 +03:00 [INF] End processing HTTP request after 1636.4497ms - 200
+2026-06-13 17:48:00.849 +03:00 [INF] Executed DbCommand (24ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Precision = 5) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Reports] ([CreatedAt], [HeatmapImagePath], [OriginalImagePath], [OverallConfidence], [PredictionsJson], [PrimaryDisease], [ReportName], [Status], [UserId])
+OUTPUT INSERTED.[ReportId]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-06-13 17:48:00.862 +03:00 [INF] Executing ObjectResult, writing value of type 'Chest_Xray.DTOs.ReportDto'.
+2026-06-13 17:48:00.866 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 1883.3846ms
+2026-06-13 17:48:00.883 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:48:00.892 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 201 469 application/json; charset=utf-8 2076.3563ms
+2026-06-13 17:48:07.880 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryuaBiaOLUX3nGRIoM 444834
+2026-06-13 17:48:07.965 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:48:07.982 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:48:08.001 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 17:48:08.062 +03:00 [INF] Start processing HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/api/predict
+2026-06-13 17:48:08.082 +03:00 [INF] Sending HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/api/predict
+2026-06-13 17:48:09.642 +03:00 [INF] Received HTTP response headers after 1555.3713ms - 200
+2026-06-13 17:48:09.647 +03:00 [INF] End processing HTTP request after 1585.9664ms - 200
+2026-06-13 17:48:09.869 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Precision = 5) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Reports] ([CreatedAt], [HeatmapImagePath], [OriginalImagePath], [OverallConfidence], [PredictionsJson], [PrimaryDisease], [ReportName], [Status], [UserId])
+OUTPUT INSERTED.[ReportId]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-06-13 17:48:09.896 +03:00 [INF] Executing ObjectResult, writing value of type 'Chest_Xray.DTOs.ReportDto'.
+2026-06-13 17:48:10.206 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 2186.3302ms
+2026-06-13 17:48:10.449 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:48:10.552 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 201 477 application/json; charset=utf-8 2672.1377ms
+2026-06-13 17:48:32.466 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/api/reports/17/pdf - null null
+2026-06-13 17:48:32.599 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray)'
+2026-06-13 17:48:32.661 +03:00 [INF] Route matched with {action = "DownloadPdf", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] DownloadPdf(Int32) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 17:48:32.750 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[@reportId='?' (DbType = Int32), @userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[ReportId], [r].[CreatedAt], [r].[HeatmapImagePath], [r].[OriginalImagePath], [r].[OverallConfidence], [r].[PredictionsJson], [r].[PrimaryDisease], [r].[ReportName], [r].[Status], [r].[UserId]
+FROM [Reports] AS [r]
+WHERE [r].[ReportId] = @reportId AND [r].[UserId] = @userId
+2026-06-13 17:48:33.573 +03:00 [INF] Executing FileContentResult, sending file with download name 'Report_20260613.pdf' ...
+2026-06-13 17:48:33.637 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray) in 956.1089ms
+2026-06-13 17:48:33.644 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray)'
+2026-06-13 17:48:33.652 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/api/reports/17/pdf - 200 581833 application/pdf 1186.0375ms
+2026-06-13 17:48:52.012 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/api/reports/17/original-image - null null
+2026-06-13 17:48:52.044 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.GetOriginalImage (Chest X-ray)'
+2026-06-13 17:48:52.083 +03:00 [INF] Route matched with {action = "GetOriginalImage", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetOriginalImage(Int32) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 17:48:52.116 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[@reportId='?' (DbType = Int32), @userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[ReportId], [r].[CreatedAt], [r].[HeatmapImagePath], [r].[OriginalImagePath], [r].[OverallConfidence], [r].[PredictionsJson], [r].[PrimaryDisease], [r].[ReportName], [r].[Status], [r].[UserId]
+FROM [Reports] AS [r]
+WHERE [r].[ReportId] = @reportId AND [r].[UserId] = @userId
+2026-06-13 17:48:52.143 +03:00 [INF] Executing FileContentResult, sending file with download name '' ...
+2026-06-13 17:48:52.171 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.GetOriginalImage (Chest X-ray) in 65.6005ms
+2026-06-13 17:48:52.187 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.GetOriginalImage (Chest X-ray)'
+2026-06-13 17:48:52.210 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/api/reports/17/original-image - 200 444655 image/png 197.8517ms
+2026-06-13 17:48:56.343 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/api/reports/16/original-image - null null
+2026-06-13 17:48:56.410 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.GetOriginalImage (Chest X-ray)'
+2026-06-13 17:48:56.439 +03:00 [INF] Route matched with {action = "GetOriginalImage", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetOriginalImage(Int32) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 17:48:56.468 +03:00 [INF] Executed DbCommand (13ms) [Parameters=[@reportId='?' (DbType = Int32), @userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[ReportId], [r].[CreatedAt], [r].[HeatmapImagePath], [r].[OriginalImagePath], [r].[OverallConfidence], [r].[PredictionsJson], [r].[PrimaryDisease], [r].[ReportName], [r].[Status], [r].[UserId]
+FROM [Reports] AS [r]
+WHERE [r].[ReportId] = @reportId AND [r].[UserId] = @userId
+2026-06-13 17:48:56.487 +03:00 [INF] Executing FileContentResult, sending file with download name '' ...
+2026-06-13 17:48:56.509 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.GetOriginalImage (Chest X-ray) in 57.6648ms
+2026-06-13 17:48:56.525 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.GetOriginalImage (Chest X-ray)'
+2026-06-13 17:48:56.604 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/api/reports/16/original-image - 200 390119 image/png 261.4534ms
+2026-06-13 17:49:00.503 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/api/reports/15/original-image - null null
+2026-06-13 17:49:00.607 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.GetOriginalImage (Chest X-ray)'
+2026-06-13 17:49:00.617 +03:00 [INF] Route matched with {action = "GetOriginalImage", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetOriginalImage(Int32) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 17:49:00.642 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[@reportId='?' (DbType = Int32), @userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[ReportId], [r].[CreatedAt], [r].[HeatmapImagePath], [r].[OriginalImagePath], [r].[OverallConfidence], [r].[PredictionsJson], [r].[PrimaryDisease], [r].[ReportName], [r].[Status], [r].[UserId]
+FROM [Reports] AS [r]
+WHERE [r].[ReportId] = @reportId AND [r].[UserId] = @userId
+2026-06-13 17:49:00.666 +03:00 [INF] Executing FileContentResult, sending file with download name '' ...
+2026-06-13 17:49:00.686 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.GetOriginalImage (Chest X-ray) in 49.8474ms
+2026-06-13 17:49:00.844 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.GetOriginalImage (Chest X-ray)'
+2026-06-13 17:49:01.084 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/api/reports/15/original-image - 200 114976 image/png 580.9631ms
+2026-06-13 17:49:08.422 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/api/reports/15/pdf - null null
+2026-06-13 17:49:08.454 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray)'
+2026-06-13 17:49:08.485 +03:00 [INF] Route matched with {action = "DownloadPdf", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] DownloadPdf(Int32) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 17:49:08.533 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[@reportId='?' (DbType = Int32), @userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[ReportId], [r].[CreatedAt], [r].[HeatmapImagePath], [r].[OriginalImagePath], [r].[OverallConfidence], [r].[PredictionsJson], [r].[PrimaryDisease], [r].[ReportName], [r].[Status], [r].[UserId]
+FROM [Reports] AS [r]
+WHERE [r].[ReportId] = @reportId AND [r].[UserId] = @userId
+2026-06-13 17:49:08.575 +03:00 [INF] Executing FileContentResult, sending file with download name 'Report_20260613.pdf' ...
+2026-06-13 17:49:08.592 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray) in 80.0719ms
+2026-06-13 17:49:08.654 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray)'
+2026-06-13 17:49:08.686 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/api/reports/15/pdf - 200 256235 application/pdf 264.038ms
+2026-06-13 17:49:44.683 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryLwGWPeI3gNUu5B7p 79778
+2026-06-13 17:49:44.885 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:49:44.917 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:49:44.951 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 17:49:45.007 +03:00 [INF] Start processing HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/api/predict
+2026-06-13 17:49:45.043 +03:00 [INF] Sending HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/api/predict
+2026-06-13 17:49:46.735 +03:00 [INF] Received HTTP response headers after 1653.7349ms - 200
+2026-06-13 17:49:46.771 +03:00 [INF] End processing HTTP request after 1764.0034ms - 200
+2026-06-13 17:49:46.854 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Precision = 5) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Reports] ([CreatedAt], [HeatmapImagePath], [OriginalImagePath], [OverallConfidence], [PredictionsJson], [PrimaryDisease], [ReportName], [Status], [UserId])
+OUTPUT INSERTED.[ReportId]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-06-13 17:49:46.920 +03:00 [INF] Executing ObjectResult, writing value of type 'Chest_Xray.DTOs.ReportDto'.
+2026-06-13 17:49:46.983 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 2004.2998ms
+2026-06-13 17:49:48.051 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:49:48.252 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 201 482 application/json; charset=utf-8 3569.1499ms
+2026-06-13 17:49:51.340 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/index.html - null null
+2026-06-13 17:49:51.351 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/index.html - 200 null text/html;charset=utf-8 10.412ms
+2026-06-13 17:49:54.065 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/api/reports/18/pdf - null null
+2026-06-13 17:49:54.146 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray)'
+2026-06-13 17:49:54.163 +03:00 [INF] Route matched with {action = "DownloadPdf", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] DownloadPdf(Int32) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 17:49:54.221 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[@reportId='?' (DbType = Int32), @userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[ReportId], [r].[CreatedAt], [r].[HeatmapImagePath], [r].[OriginalImagePath], [r].[OverallConfidence], [r].[PredictionsJson], [r].[PrimaryDisease], [r].[ReportName], [r].[Status], [r].[UserId]
+FROM [Reports] AS [r]
+WHERE [r].[ReportId] = @reportId AND [r].[UserId] = @userId
+2026-06-13 17:49:54.407 +03:00 [INF] Executing FileContentResult, sending file with download name 'Report_20260613.pdf' ...
+2026-06-13 17:49:54.456 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray) in 248.0299ms
+2026-06-13 17:49:54.498 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray)'
+2026-06-13 17:49:54.506 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/api/reports/18/pdf - 200 154119 application/pdf 441.6203ms
+2026-06-13 17:58:21.235 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/api/reports/15/pdf - null null
+2026-06-13 17:58:21.252 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray)'
+2026-06-13 17:58:21.262 +03:00 [INF] Route matched with {action = "DownloadPdf", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] DownloadPdf(Int32) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 17:58:21.314 +03:00 [INF] Executed DbCommand (17ms) [Parameters=[@reportId='?' (DbType = Int32), @userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[ReportId], [r].[CreatedAt], [r].[HeatmapImagePath], [r].[OriginalImagePath], [r].[OverallConfidence], [r].[PredictionsJson], [r].[PrimaryDisease], [r].[ReportName], [r].[Status], [r].[UserId]
+FROM [Reports] AS [r]
+WHERE [r].[ReportId] = @reportId AND [r].[UserId] = @userId
+2026-06-13 17:58:21.363 +03:00 [INF] Executing FileContentResult, sending file with download name 'Report_20260613.pdf' ...
+2026-06-13 17:58:21.380 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray) in 104.1883ms
+2026-06-13 17:58:21.417 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray)'
+2026-06-13 17:58:21.518 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/api/reports/15/pdf - 200 256235 application/pdf 282.8464ms
+2026-06-13 17:58:47.203 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/index.html - null null
+2026-06-13 17:58:47.213 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/index.html - 200 null text/html;charset=utf-8 9.4513ms
+2026-06-13 17:58:47.332 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundarykpqGqq85FOmvlxei 135497
+2026-06-13 17:58:47.436 +03:00 [INF] CORS policy execution successful.
+2026-06-13 17:58:47.446 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:58:47.466 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 17:58:47.510 +03:00 [INF] Start processing HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/api/predict
+2026-06-13 17:58:47.532 +03:00 [INF] Sending HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/api/predict
+2026-06-13 17:58:48.637 +03:00 [INF] Received HTTP response headers after 1090.3716ms - 530
+2026-06-13 17:58:48.843 +03:00 [INF] End processing HTTP request after 1333.4725ms - 530
+2026-06-13 17:58:48.866 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 1383.1864ms
+2026-06-13 17:58:48.877 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 17:58:48.886 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: AI Service Error (530): error code: 1033
+   at Chest_Xray.Services.AiPredictionService.PredictAsync(String base64Image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\AiPredictionService.cs:line 43
+   at Chest_Xray.Services.ReportService.UploadAndAnalyzeAsync(Int32 userId, IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\ReportService.cs:line 56
+   at Chest_Xray.Controllers.ReportsController.UploadAndAnalyze(IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Controllers\ReportsController.cs:line 33
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-06-13 17:58:48.971 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 500 null text/plain; charset=utf-8 1638.977ms
+2026-06-13 17:59:07.190 +03:00 [INF] Application is shutting down...
+2026-06-13 18:00:18.383 +03:00 [INF] User profile is available. Using 'C:\Users\lab\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-06-13 18:00:18.563 +03:00 [INF] Now listening on: http://localhost:5098
+2026-06-13 18:00:18.571 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-13 18:00:18.574 +03:00 [INF] Hosting environment: Development
+2026-06-13 18:00:18.578 +03:00 [INF] Content root path: D:\Saif\New Style\Final_Project\Chest X-ray
+2026-06-13 18:00:23.520 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/index.html - null null
+2026-06-13 18:00:25.103 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/index.html - 200 null text/html;charset=utf-8 1587.4539ms
+2026-06-13 18:00:25.796 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - null null
+2026-06-13 18:00:26.696 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 901.4062ms
+2026-06-13 18:00:38.861 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/auth/login - application/json-patch+json 59
+2026-06-13 18:00:38.920 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-06-13 18:00:38.926 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:00:39.040 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 18:00:39.135 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Chest_Xray.DTOs.LoginDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 18:00:44.461 +03:00 [INF] Executed DbCommand (151ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedAt], [u].[Email], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @dto_Email
+2026-06-13 18:00:45.237 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 18:00:45.332 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Login (Chest X-ray) in 6166.6484ms
+2026-06-13 18:00:45.367 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 18:00:46.003 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/auth/login - 200 535 application/json; charset=utf-8 7142.2887ms
+2026-06-13 18:01:03.404 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryDWNXyQf5RSDNbG11 390298
+2026-06-13 18:01:03.504 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:01:04.072 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:01:04.397 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 18:01:04.500 +03:00 [INF] Start processing HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/api/predict
+2026-06-13 18:01:04.506 +03:00 [INF] Sending HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/api/predict
+2026-06-13 18:01:05.834 +03:00 [INF] Received HTTP response headers after 1300.3045ms - 530
+2026-06-13 18:01:05.870 +03:00 [INF] End processing HTTP request after 1371.6129ms - 530
+2026-06-13 18:01:05.935 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 1517.7518ms
+2026-06-13 18:01:06.004 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:01:06.023 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: AI Service Error (530): error code: 1033
+   at Chest_Xray.Services.AiPredictionService.PredictAsync(String base64Image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\AiPredictionService.cs:line 43
+   at Chest_Xray.Services.ReportService.UploadAndAnalyzeAsync(Int32 userId, IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\ReportService.cs:line 56
+   at Chest_Xray.Controllers.ReportsController.UploadAndAnalyze(IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Controllers\ReportsController.cs:line 33
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-06-13 18:01:06.106 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 500 null text/plain; charset=utf-8 2701.5476ms
+2026-06-13 18:01:16.737 +03:00 [INF] Application is shutting down...
+2026-06-13 18:01:53.092 +03:00 [INF] User profile is available. Using 'C:\Users\lab\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-06-13 18:01:53.295 +03:00 [INF] Now listening on: http://localhost:5098
+2026-06-13 18:01:53.320 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-13 18:01:53.325 +03:00 [INF] Hosting environment: Development
+2026-06-13 18:01:53.334 +03:00 [INF] Content root path: D:\Saif\New Style\Final_Project\Chest X-ray
+2026-06-13 18:01:56.107 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/index.html - null null
+2026-06-13 18:01:56.433 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/index.html - 200 null text/html;charset=utf-8 326.3484ms
+2026-06-13 18:01:57.527 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - null null
+2026-06-13 18:01:58.446 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 920.1655ms
+2026-06-13 18:02:11.036 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/auth/login - application/json-patch+json 59
+2026-06-13 18:02:11.072 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-06-13 18:02:11.083 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:02:11.239 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 18:02:11.335 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Chest_Xray.DTOs.LoginDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 18:02:14.499 +03:00 [INF] Executed DbCommand (112ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedAt], [u].[Email], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @dto_Email
+2026-06-13 18:02:15.537 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 18:02:15.635 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Login (Chest X-ray) in 4258.8289ms
+2026-06-13 18:02:15.824 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 18:02:16.124 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/auth/login - 200 535 application/json; charset=utf-8 5087.3995ms
+2026-06-13 18:02:33.083 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryDxJOmCuvqIVqrDly 457791
+2026-06-13 18:02:33.222 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:02:33.835 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:02:33.889 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 18:02:33.987 +03:00 [INF] Start processing HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/api/predict
+2026-06-13 18:02:33.995 +03:00 [INF] Sending HTTP request POST https://spot-myers-dimensions-encourages.trycloudflare.com/api/predict
+2026-06-13 18:02:35.231 +03:00 [INF] Received HTTP response headers after 1227.3036ms - 530
+2026-06-13 18:02:35.239 +03:00 [INF] End processing HTTP request after 1253.8741ms - 530
+2026-06-13 18:02:35.263 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 1365.121ms
+2026-06-13 18:02:35.270 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:02:35.288 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: AI Service Error (530): error code: 1033
+   at Chest_Xray.Services.AiPredictionService.PredictAsync(String base64Image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\AiPredictionService.cs:line 43
+   at Chest_Xray.Services.ReportService.UploadAndAnalyzeAsync(Int32 userId, IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\ReportService.cs:line 56
+   at Chest_Xray.Controllers.ReportsController.UploadAndAnalyze(IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Controllers\ReportsController.cs:line 33
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-06-13 18:02:35.383 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 500 null text/plain; charset=utf-8 2299.1826ms
+2026-06-13 18:07:13.873 +03:00 [INF] Application is shutting down...
+2026-06-13 18:07:30.836 +03:00 [INF] User profile is available. Using 'C:\Users\lab\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-06-13 18:07:31.029 +03:00 [INF] Now listening on: http://localhost:5098
+2026-06-13 18:07:31.053 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-13 18:07:31.057 +03:00 [INF] Hosting environment: Development
+2026-06-13 18:07:31.062 +03:00 [INF] Content root path: D:\Saif\New Style\Final_Project\Chest X-ray
+2026-06-13 18:07:35.356 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/index.html - null null
+2026-06-13 18:07:36.271 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/index.html - 200 null text/html;charset=utf-8 929.6013ms
+2026-06-13 18:07:36.796 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - null null
+2026-06-13 18:07:38.064 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 1268.4555ms
+2026-06-13 18:07:42.860 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/index.html - null null
+2026-06-13 18:07:42.886 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/index.html - 200 null text/html;charset=utf-8 26.0333ms
+2026-06-13 18:07:50.547 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/auth/login - application/json-patch+json 59
+2026-06-13 18:07:50.639 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-06-13 18:07:50.645 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:07:50.761 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 18:07:50.833 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Chest_Xray.DTOs.LoginDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 18:07:53.640 +03:00 [INF] Executed DbCommand (75ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedAt], [u].[Email], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @dto_Email
+2026-06-13 18:07:54.190 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 18:07:54.294 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Login (Chest X-ray) in 3375.3323ms
+2026-06-13 18:07:54.304 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 18:07:54.352 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/auth/login - 200 534 application/json; charset=utf-8 3795.1604ms
+2026-06-13 18:08:19.735 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundarytfTfp7BRnpcCo83e 390298
+2026-06-13 18:08:19.823 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:08:19.988 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:08:20.023 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 18:08:20.272 +03:00 [INF] Start processing HTTP request POST https://nancy-whilst-henderson-missions.trycloudflare.com/:8000
+2026-06-13 18:08:20.286 +03:00 [INF] Sending HTTP request POST https://nancy-whilst-henderson-missions.trycloudflare.com/:8000
+2026-06-13 18:08:21.755 +03:00 [INF] Received HTTP response headers after 1451.0681ms - 502
+2026-06-13 18:08:21.800 +03:00 [INF] End processing HTTP request after 1527.7716ms - 502
+2026-06-13 18:08:21.833 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 1776.0154ms
+2026-06-13 18:08:21.892 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:08:21.915 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: AI Service Error (BadGateway): error code: 502
+   at Chest_Xray.Services.AiPredictionService.PredictAsync(String base64Image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\AiPredictionService.cs:line 43
+   at Chest_Xray.Services.ReportService.UploadAndAnalyzeAsync(Int32 userId, IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\ReportService.cs:line 56
+   at Chest_Xray.Controllers.ReportsController.UploadAndAnalyze(IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Controllers\ReportsController.cs:line 33
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-06-13 18:08:22.055 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 500 null text/plain; charset=utf-8 2319.3458ms
+2026-06-13 18:08:39.194 +03:00 [INF] Application is shutting down...
+2026-06-13 18:09:20.730 +03:00 [INF] User profile is available. Using 'C:\Users\lab\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-06-13 18:09:20.977 +03:00 [INF] Now listening on: http://localhost:5098
+2026-06-13 18:09:20.989 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-13 18:09:20.992 +03:00 [INF] Hosting environment: Development
+2026-06-13 18:09:20.995 +03:00 [INF] Content root path: D:\Saif\New Style\Final_Project\Chest X-ray
+2026-06-13 18:09:24.993 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/index.html - null null
+2026-06-13 18:09:25.723 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/index.html - 200 null text/html;charset=utf-8 747.0693ms
+2026-06-13 18:09:26.602 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - null null
+2026-06-13 18:09:27.237 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 642.2332ms
+2026-06-13 18:09:39.322 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/auth/login - application/json-patch+json 59
+2026-06-13 18:09:39.386 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-06-13 18:09:39.401 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:09:45.705 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 18:09:45.836 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Chest_Xray.DTOs.LoginDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 18:09:52.635 +03:00 [INF] Executed DbCommand (160ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedAt], [u].[Email], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @dto_Email
+2026-06-13 18:09:53.347 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 18:09:53.416 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Login (Chest X-ray) in 7470.9878ms
+2026-06-13 18:09:53.435 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 18:09:53.872 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/auth/login - 200 535 application/json; charset=utf-8 14549.6533ms
+2026-06-13 18:10:08.827 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundary4aHlIHABhngcVArk 457791
+2026-06-13 18:10:08.902 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:10:09.166 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:10:09.200 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 18:10:09.405 +03:00 [INF] Start processing HTTP request POST https://nancy-whilst-henderson-missions.trycloudflare.com/:8000
+2026-06-13 18:10:09.634 +03:00 [INF] Sending HTTP request POST https://nancy-whilst-henderson-missions.trycloudflare.com/:8000
+2026-06-13 18:10:10.998 +03:00 [INF] Received HTTP response headers after 1311.4543ms - 502
+2026-06-13 18:10:11.008 +03:00 [INF] End processing HTTP request after 1604.8877ms - 502
+2026-06-13 18:10:11.028 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 1805.6429ms
+2026-06-13 18:10:11.034 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:10:11.043 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: AI Service Error (BadGateway): error code: 502
+   at Chest_Xray.Services.AiPredictionService.PredictAsync(String base64Image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\AiPredictionService.cs:line 43
+   at Chest_Xray.Services.ReportService.UploadAndAnalyzeAsync(Int32 userId, IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\ReportService.cs:line 56
+   at Chest_Xray.Controllers.ReportsController.UploadAndAnalyze(IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Controllers\ReportsController.cs:line 33
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-06-13 18:10:11.116 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 500 null text/plain; charset=utf-8 2288.2672ms
+2026-06-13 18:11:31.954 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundary9ZugU9VQwknn4q17 457791
+2026-06-13 18:11:32.017 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:11:32.053 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:11:32.070 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 18:11:32.145 +03:00 [INF] Start processing HTTP request POST https://nancy-whilst-henderson-missions.trycloudflare.com/:8000
+2026-06-13 18:11:32.149 +03:00 [INF] Sending HTTP request POST https://nancy-whilst-henderson-missions.trycloudflare.com/:8000
+2026-06-13 18:11:33.315 +03:00 [INF] Received HTTP response headers after 1161.7987ms - 502
+2026-06-13 18:11:33.335 +03:00 [INF] End processing HTTP request after 1190.2509ms - 502
+2026-06-13 18:11:33.348 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 1262.1656ms
+2026-06-13 18:11:33.373 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:11:33.382 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: AI Service Error (BadGateway): error code: 502
+   at Chest_Xray.Services.AiPredictionService.PredictAsync(String base64Image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\AiPredictionService.cs:line 43
+   at Chest_Xray.Services.ReportService.UploadAndAnalyzeAsync(Int32 userId, IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\ReportService.cs:line 56
+   at Chest_Xray.Controllers.ReportsController.UploadAndAnalyze(IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Controllers\ReportsController.cs:line 33
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-06-13 18:11:33.513 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 500 null text/plain; charset=utf-8 1558.9498ms
+2026-06-13 18:16:55.722 +03:00 [INF] Application is shutting down...
+2026-06-13 18:17:17.886 +03:00 [INF] User profile is available. Using 'C:\Users\lab\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-06-13 18:17:18.584 +03:00 [INF] Now listening on: http://localhost:5098
+2026-06-13 18:17:18.684 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-13 18:17:18.836 +03:00 [INF] Hosting environment: Development
+2026-06-13 18:17:18.845 +03:00 [INF] Content root path: D:\Saif\New Style\Final_Project\Chest X-ray
+2026-06-13 18:17:22.094 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/index.html - null null
+2026-06-13 18:17:22.551 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/index.html - 200 null text/html;charset=utf-8 794.5737ms
+2026-06-13 18:17:23.419 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - null null
+2026-06-13 18:17:23.887 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 499.7714ms
+2026-06-13 18:17:39.117 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/auth/login - application/json-patch+json 59
+2026-06-13 18:17:39.213 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-06-13 18:17:39.218 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:17:39.297 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 18:17:39.402 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Chest_Xray.DTOs.LoginDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 18:17:43.720 +03:00 [INF] Executed DbCommand (116ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedAt], [u].[Email], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @dto_Email
+2026-06-13 18:17:44.358 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 18:17:44.457 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Login (Chest X-ray) in 4999.099ms
+2026-06-13 18:17:44.473 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 18:17:44.505 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/auth/login - 200 535 application/json; charset=utf-8 5388.0558ms
+2026-06-13 18:18:02.187 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundarybhdHSfYsnGlTW21e 390298
+2026-06-13 18:18:02.935 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:18:03.074 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:18:03.108 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 18:18:03.256 +03:00 [INF] Start processing HTTP request POST https://nancy-whilst-henderson-missions.trycloudflare.com/api/predict
+2026-06-13 18:18:03.267 +03:00 [INF] Sending HTTP request POST https://nancy-whilst-henderson-missions.trycloudflare.com/api/predict
+2026-06-13 18:18:06.383 +03:00 [INF] Received HTTP response headers after 3102.7302ms - 200
+2026-06-13 18:18:06.392 +03:00 [INF] End processing HTTP request after 3136.4243ms - 200
+2026-06-13 18:18:07.011 +03:00 [INF] Executed DbCommand (33ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Precision = 5) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Reports] ([CreatedAt], [HeatmapImagePath], [OriginalImagePath], [OverallConfidence], [PredictionsJson], [PrimaryDisease], [ReportName], [Status], [UserId])
+OUTPUT INSERTED.[ReportId]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-06-13 18:18:07.361 +03:00 [INF] Executing ObjectResult, writing value of type 'Chest_Xray.DTOs.ReportDto'.
+2026-06-13 18:18:07.488 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 4367.3961ms
+2026-06-13 18:18:08.208 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:18:08.223 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 201 468 application/json; charset=utf-8 6035.2275ms
+2026-06-13 18:18:20.924 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryqArSq2Hj3w9aBcH1 790100
+2026-06-13 18:18:21.075 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:18:21.115 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:18:21.122 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 18:18:21.185 +03:00 [INF] Start processing HTTP request POST https://nancy-whilst-henderson-missions.trycloudflare.com/api/predict
+2026-06-13 18:18:21.192 +03:00 [INF] Sending HTTP request POST https://nancy-whilst-henderson-missions.trycloudflare.com/api/predict
+2026-06-13 18:18:23.434 +03:00 [INF] Received HTTP response headers after 2217.3238ms - 200
+2026-06-13 18:18:23.442 +03:00 [INF] End processing HTTP request after 2257.2633ms - 200
+2026-06-13 18:18:23.853 +03:00 [INF] Executed DbCommand (14ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Precision = 5) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Reports] ([CreatedAt], [HeatmapImagePath], [OriginalImagePath], [OverallConfidence], [PredictionsJson], [PrimaryDisease], [ReportName], [Status], [UserId])
+OUTPUT INSERTED.[ReportId]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-06-13 18:18:23.875 +03:00 [INF] Executing ObjectResult, writing value of type 'Chest_Xray.DTOs.ReportDto'.
+2026-06-13 18:18:23.883 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 2741.262ms
+2026-06-13 18:18:23.891 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:18:23.917 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 201 482 application/json; charset=utf-8 2992.7345ms
+2026-06-13 18:18:35.158 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/api/reports/20/pdf - null null
+2026-06-13 18:18:35.354 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray)'
+2026-06-13 18:18:35.422 +03:00 [INF] Route matched with {action = "DownloadPdf", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] DownloadPdf(Int32) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 18:18:35.707 +03:00 [INF] Executed DbCommand (17ms) [Parameters=[@reportId='?' (DbType = Int32), @userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[ReportId], [r].[CreatedAt], [r].[HeatmapImagePath], [r].[OriginalImagePath], [r].[OverallConfidence], [r].[PredictionsJson], [r].[PrimaryDisease], [r].[ReportName], [r].[Status], [r].[UserId]
+FROM [Reports] AS [r]
+WHERE [r].[ReportId] = @reportId AND [r].[UserId] = @userId
+2026-06-13 18:18:36.561 +03:00 [INF] Executing FileContentResult, sending file with download name 'Report_20260613.pdf' ...
+2026-06-13 18:18:36.613 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray) in 1155.7225ms
+2026-06-13 18:18:36.619 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray)'
+2026-06-13 18:18:36.623 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/api/reports/20/pdf - 200 959662 application/pdf 1465.0671ms
+2026-06-13 18:20:13.110 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundary9EDv6LFAiU44BItA 53460
+2026-06-13 18:20:13.205 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:20:13.238 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:20:13.256 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 18:20:13.338 +03:00 [INF] Start processing HTTP request POST https://nancy-whilst-henderson-missions.trycloudflare.com/api/predict
+2026-06-13 18:20:13.353 +03:00 [INF] Sending HTTP request POST https://nancy-whilst-henderson-missions.trycloudflare.com/api/predict
+2026-06-13 18:20:14.940 +03:00 [INF] Received HTTP response headers after 1562.1001ms - 200
+2026-06-13 18:20:14.952 +03:00 [INF] End processing HTTP request after 1613.3693ms - 200
+2026-06-13 18:20:15.113 +03:00 [INF] Executed DbCommand (32ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Precision = 5) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Reports] ([CreatedAt], [HeatmapImagePath], [OriginalImagePath], [OverallConfidence], [PredictionsJson], [PrimaryDisease], [ReportName], [Status], [UserId])
+OUTPUT INSERTED.[ReportId]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-06-13 18:20:15.135 +03:00 [INF] Executing ObjectResult, writing value of type 'Chest_Xray.DTOs.ReportDto'.
+2026-06-13 18:20:15.144 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 1821.4787ms
+2026-06-13 18:20:15.171 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:20:15.183 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 201 480 application/json; charset=utf-8 2072.769ms
+2026-06-13 18:20:21.653 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/api/reports/21/pdf - null null
+2026-06-13 18:20:21.754 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray)'
+2026-06-13 18:20:21.763 +03:00 [INF] Route matched with {action = "DownloadPdf", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] DownloadPdf(Int32) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 18:20:21.827 +03:00 [INF] Executed DbCommand (12ms) [Parameters=[@reportId='?' (DbType = Int32), @userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[ReportId], [r].[CreatedAt], [r].[HeatmapImagePath], [r].[OriginalImagePath], [r].[OverallConfidence], [r].[PredictionsJson], [r].[PrimaryDisease], [r].[ReportName], [r].[Status], [r].[UserId]
+FROM [Reports] AS [r]
+WHERE [r].[ReportId] = @reportId AND [r].[UserId] = @userId
+2026-06-13 18:20:21.858 +03:00 [INF] Executing FileContentResult, sending file with download name 'Report_20260613.pdf' ...
+2026-06-13 18:20:21.881 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray) in 95.852ms
+2026-06-13 18:20:21.995 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray)'
+2026-06-13 18:20:22.014 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/api/reports/21/pdf - 200 144211 application/pdf 360.7529ms
+2026-06-13 18:25:48.665 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryQJbofm7x6ZTfpHiq 102846
+2026-06-13 18:25:48.756 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:25:48.791 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:25:48.823 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 18:25:48.896 +03:00 [INF] Start processing HTTP request POST https://nancy-whilst-henderson-missions.trycloudflare.com/api/predict
+2026-06-13 18:25:48.923 +03:00 [INF] Sending HTTP request POST https://nancy-whilst-henderson-missions.trycloudflare.com/api/predict
+2026-06-13 18:25:50.477 +03:00 [INF] Received HTTP response headers after 1513.4796ms - 200
+2026-06-13 18:25:50.517 +03:00 [INF] End processing HTTP request after 1620.9057ms - 200
+2026-06-13 18:25:50.585 +03:00 [INF] Executed DbCommand (28ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Precision = 5) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Reports] ([CreatedAt], [HeatmapImagePath], [OriginalImagePath], [OverallConfidence], [PredictionsJson], [PrimaryDisease], [ReportName], [Status], [UserId])
+OUTPUT INSERTED.[ReportId]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-06-13 18:25:50.596 +03:00 [INF] Executing ObjectResult, writing value of type 'Chest_Xray.DTOs.ReportDto'.
+2026-06-13 18:25:50.612 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 1726.3175ms
+2026-06-13 18:25:50.632 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:25:50.655 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 201 467 application/json; charset=utf-8 1990.8204ms
+2026-06-13 18:25:59.436 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/api/reports/22/pdf - null null
+2026-06-13 18:25:59.520 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray)'
+2026-06-13 18:25:59.552 +03:00 [INF] Route matched with {action = "DownloadPdf", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] DownloadPdf(Int32) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 18:25:59.621 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@reportId='?' (DbType = Int32), @userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[ReportId], [r].[CreatedAt], [r].[HeatmapImagePath], [r].[OriginalImagePath], [r].[OverallConfidence], [r].[PredictionsJson], [r].[PrimaryDisease], [r].[ReportName], [r].[Status], [r].[UserId]
+FROM [Reports] AS [r]
+WHERE [r].[ReportId] = @reportId AND [r].[UserId] = @userId
+2026-06-13 18:25:59.661 +03:00 [INF] Executing FileContentResult, sending file with download name 'Report_20260613.pdf' ...
+2026-06-13 18:25:59.686 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray) in 82.9008ms
+2026-06-13 18:25:59.718 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray)'
+2026-06-13 18:25:59.755 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/api/reports/22/pdf - 200 235559 application/pdf 319.356ms
+2026-06-13 18:26:57.173 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/auth/register - application/json-patch+json 90
+2026-06-13 18:26:57.244 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:26:57.255 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Register (Chest X-ray)'
+2026-06-13 18:26:57.286 +03:00 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(Chest_Xray.DTOs.RegisterDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 18:26:57.456 +03:00 [INF] Executed DbCommand (33ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]
+        WHERE [u].[Email] = @dto_Email) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-06-13 18:26:57.826 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 450), @p2='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Users] ([CreatedAt], [Email], [Password])
+OUTPUT INSERTED.[UserId]
+VALUES (@p0, @p1, @p2);
+2026-06-13 18:26:57.861 +03:00 [INF] Executing ObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 18:26:57.876 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Register (Chest X-ray) in 568.781ms
+2026-06-13 18:26:57.888 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Register (Chest X-ray)'
+2026-06-13 18:26:57.895 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/auth/register - 201 535 application/json; charset=utf-8 721.9838ms
+2026-06-13 18:27:14.118 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/auth/login - application/json-patch+json 57
+2026-06-13 18:27:14.183 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:27:14.187 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 18:27:14.193 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Chest_Xray.DTOs.LoginDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 18:27:14.223 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedAt], [u].[Email], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @dto_Email
+2026-06-13 18:27:14.451 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 18:27:14.456 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Login (Chest X-ray) in 241.6652ms
+2026-06-13 18:27:14.486 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 18:27:14.496 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/auth/login - 200 534 application/json; charset=utf-8 377.922ms
+2026-06-13 18:27:40.160 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryf6JwUtZkBruYkJQk 444834
+2026-06-13 18:27:40.261 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:27:40.284 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:27:40.298 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 18:27:40.404 +03:00 [INF] Start processing HTTP request POST https://nancy-whilst-henderson-missions.trycloudflare.com/api/predict
+2026-06-13 18:27:40.424 +03:00 [INF] Sending HTTP request POST https://nancy-whilst-henderson-missions.trycloudflare.com/api/predict
+2026-06-13 18:27:42.575 +03:00 [INF] Received HTTP response headers after 2124.9108ms - 200
+2026-06-13 18:27:42.581 +03:00 [INF] End processing HTTP request after 2178.2271ms - 200
+2026-06-13 18:27:42.763 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Precision = 5) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Reports] ([CreatedAt], [HeatmapImagePath], [OriginalImagePath], [OverallConfidence], [PredictionsJson], [PrimaryDisease], [ReportName], [Status], [UserId])
+OUTPUT INSERTED.[ReportId]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-06-13 18:27:42.782 +03:00 [INF] Executing ObjectResult, writing value of type 'Chest_Xray.DTOs.ReportDto'.
+2026-06-13 18:27:42.787 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 2411.1144ms
+2026-06-13 18:27:42.797 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:27:42.814 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 201 477 application/json; charset=utf-8 2654.187ms
+2026-06-13 18:27:48.889 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/api/reports?page=1&limit=10 - null null
+2026-06-13 18:27:49.015 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.GetReports (Chest X-ray)'
+2026-06-13 18:27:49.046 +03:00 [INF] Route matched with {action = "GetReports", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetReports(Int32, Int32, System.String, System.String) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 18:27:49.177 +03:00 [INF] Executed DbCommand (15ms) [Parameters=[@userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[ReportId], [r].[CreatedAt], [r].[HeatmapImagePath], [r].[OriginalImagePath], [r].[OverallConfidence], [r].[PredictionsJson], [r].[PrimaryDisease], [r].[ReportName], [r].[Status], [r].[UserId]
+FROM [Reports] AS [r]
+WHERE [r].[UserId] = @userId
+2026-06-13 18:27:49.368 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[@userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Reports] AS [r]
+WHERE [r].[UserId] = @userId
+2026-06-13 18:27:49.548 +03:00 [INF] Executed DbCommand (16ms) [Parameters=[@userId='?' (DbType = Int32), @p='?' (DbType = Int32), @p2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[ReportId], [r].[Status], [r].[PrimaryDisease], [r].[OverallConfidence], [r].[CreatedAt], [r].[ReportName]
+FROM [Reports] AS [r]
+WHERE [r].[UserId] = @userId
+ORDER BY [r].[CreatedAt] DESC
+OFFSET @p ROWS FETCH NEXT @p2 ROWS ONLY
+2026-06-13 18:27:49.563 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.PagedReportResponseDto'.
+2026-06-13 18:27:49.591 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.GetReports (Chest X-ray) in 529.047ms
+2026-06-13 18:27:49.658 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.GetReports (Chest X-ray)'
+2026-06-13 18:27:49.686 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/api/reports?page=1&limit=10 - 200 437 application/json; charset=utf-8 796.7693ms
+2026-06-13 18:27:57.917 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/api/reports/23 - null null
+2026-06-13 18:27:58.126 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.GetReportById (Chest X-ray)'
+2026-06-13 18:27:58.167 +03:00 [INF] Route matched with {action = "GetReportById", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetReportById(Int32) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 18:27:58.262 +03:00 [INF] Executed DbCommand (11ms) [Parameters=[@reportId='?' (DbType = Int32), @userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[ReportId], [r].[CreatedAt], [r].[HeatmapImagePath], [r].[OriginalImagePath], [r].[OverallConfidence], [r].[PredictionsJson], [r].[PrimaryDisease], [r].[ReportName], [r].[Status], [r].[UserId]
+FROM [Reports] AS [r]
+WHERE [r].[ReportId] = @reportId AND [r].[UserId] = @userId
+2026-06-13 18:27:58.357 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.ReportDto'.
+2026-06-13 18:27:58.367 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.GetReportById (Chest X-ray) in 149.7472ms
+2026-06-13 18:27:58.425 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.GetReportById (Chest X-ray)'
+2026-06-13 18:27:58.431 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/api/reports/23 - 200 474 application/json; charset=utf-8 514.4026ms
+2026-06-13 18:28:07.927 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/api/reports/23/original-image - null null
+2026-06-13 18:28:08.031 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.GetOriginalImage (Chest X-ray)'
+2026-06-13 18:28:08.125 +03:00 [INF] Route matched with {action = "GetOriginalImage", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetOriginalImage(Int32) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 18:28:08.391 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[@reportId='?' (DbType = Int32), @userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[ReportId], [r].[CreatedAt], [r].[HeatmapImagePath], [r].[OriginalImagePath], [r].[OverallConfidence], [r].[PredictionsJson], [r].[PrimaryDisease], [r].[ReportName], [r].[Status], [r].[UserId]
+FROM [Reports] AS [r]
+WHERE [r].[ReportId] = @reportId AND [r].[UserId] = @userId
+2026-06-13 18:28:08.563 +03:00 [INF] Executing FileContentResult, sending file with download name '' ...
+2026-06-13 18:28:08.618 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.GetOriginalImage (Chest X-ray) in 261.9891ms
+2026-06-13 18:28:08.682 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.GetOriginalImage (Chest X-ray)'
+2026-06-13 18:28:08.765 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/api/reports/23/original-image - 200 444655 image/png 837.6487ms
+2026-06-13 18:28:13.464 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/api/reports/23/heatmap-image - null null
+2026-06-13 18:28:13.628 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.GetHeatmapImage (Chest X-ray)'
+2026-06-13 18:28:14.255 +03:00 [INF] Route matched with {action = "GetHeatmapImage", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetHeatmapImage(Int32) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 18:28:14.358 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[@reportId='?' (DbType = Int32), @userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[ReportId], [r].[CreatedAt], [r].[HeatmapImagePath], [r].[OriginalImagePath], [r].[OverallConfidence], [r].[PredictionsJson], [r].[PrimaryDisease], [r].[ReportName], [r].[Status], [r].[UserId]
+FROM [Reports] AS [r]
+WHERE [r].[ReportId] = @reportId AND [r].[UserId] = @userId
+2026-06-13 18:28:14.386 +03:00 [INF] Executing FileContentResult, sending file with download name '' ...
+2026-06-13 18:28:14.397 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.GetHeatmapImage (Chest X-ray) in 69.2484ms
+2026-06-13 18:28:14.426 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.GetHeatmapImage (Chest X-ray)'
+2026-06-13 18:28:14.579 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/api/reports/23/heatmap-image - 200 135457 image/png 1114.8717ms
+2026-06-13 18:28:19.664 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/api/reports/23/pdf - null null
+2026-06-13 18:28:19.730 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray)'
+2026-06-13 18:28:19.754 +03:00 [INF] Route matched with {action = "DownloadPdf", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] DownloadPdf(Int32) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 18:28:19.785 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[@reportId='?' (DbType = Int32), @userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[ReportId], [r].[CreatedAt], [r].[HeatmapImagePath], [r].[OriginalImagePath], [r].[OverallConfidence], [r].[PredictionsJson], [r].[PrimaryDisease], [r].[ReportName], [r].[Status], [r].[UserId]
+FROM [Reports] AS [r]
+WHERE [r].[ReportId] = @reportId AND [r].[UserId] = @userId
+2026-06-13 18:28:19.858 +03:00 [INF] Executing FileContentResult, sending file with download name 'Report_20260613.pdf' ...
+2026-06-13 18:28:19.885 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray) in 112.7511ms
+2026-06-13 18:28:19.941 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray)'
+2026-06-13 18:28:19.958 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/api/reports/23/pdf - 200 581833 application/pdf 294.0438ms
+2026-06-13 18:28:48.338 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/index.html - null null
+2026-06-13 18:28:48.358 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/index.html - 200 null text/html;charset=utf-8 19.7726ms
+2026-06-13 18:29:01.005 +03:00 [INF] Application is shutting down...
+2026-06-13 18:35:56.937 +03:00 [INF] User profile is available. Using 'C:\Users\lab\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-06-13 18:35:57.114 +03:00 [INF] Now listening on: http://localhost:5098
+2026-06-13 18:35:57.127 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-13 18:35:57.132 +03:00 [INF] Hosting environment: Development
+2026-06-13 18:35:57.136 +03:00 [INF] Content root path: D:\Saif\New Style\Final_Project\Chest X-ray
+2026-06-13 18:36:01.191 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/index.html - null null
+2026-06-13 18:36:01.535 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/index.html - 200 null text/html;charset=utf-8 359.7981ms
+2026-06-13 18:36:02.140 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - null null
+2026-06-13 18:36:02.673 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 535.3598ms
+2026-06-13 18:36:16.234 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/auth/login - application/json-patch+json 57
+2026-06-13 18:36:16.358 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-06-13 18:36:16.366 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:36:16.435 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 18:36:16.570 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Chest_Xray.DTOs.LoginDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 18:36:19.844 +03:00 [INF] Executed DbCommand (79ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedAt], [u].[Email], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @dto_Email
+2026-06-13 18:36:20.380 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 18:36:20.455 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Login (Chest X-ray) in 3830.6285ms
+2026-06-13 18:36:20.466 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 18:36:20.565 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/auth/login - 200 535 application/json; charset=utf-8 4330.3993ms
+2026-06-13 18:36:36.441 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryZ0wjXPBb9qyHl0El 457791
+2026-06-13 18:36:36.530 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:36:36.656 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:36:36.680 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 18:36:36.840 +03:00 [INF] Start processing HTTP request POST https://holmes-soccer-mls-transit.trycloudflare.com/api/predict
+2026-06-13 18:36:36.847 +03:00 [INF] Sending HTTP request POST https://holmes-soccer-mls-transit.trycloudflare.com/api/predict
+2026-06-13 18:36:41.507 +03:00 [INF] Received HTTP response headers after 4642.5258ms - 200
+2026-06-13 18:36:41.523 +03:00 [INF] End processing HTTP request after 4686.8125ms - 200
+2026-06-13 18:36:42.334 +03:00 [INF] Executed DbCommand (24ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Precision = 5) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Reports] ([CreatedAt], [HeatmapImagePath], [OriginalImagePath], [OverallConfidence], [PredictionsJson], [PrimaryDisease], [ReportName], [Status], [UserId])
+OUTPUT INSERTED.[ReportId]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-06-13 18:36:42.468 +03:00 [INF] Executing ObjectResult, writing value of type 'Chest_Xray.DTOs.ReportDto'.
+2026-06-13 18:36:42.512 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 5802.939ms
+2026-06-13 18:36:42.541 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:36:42.562 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 201 478 application/json; charset=utf-8 6121.6391ms
+2026-06-13 18:36:58.464 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/auth/login - application/json-patch+json 59
+2026-06-13 18:36:58.546 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:36:58.564 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 18:36:58.573 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Chest_Xray.DTOs.LoginDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 18:36:58.794 +03:00 [INF] Executed DbCommand (20ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedAt], [u].[Email], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @dto_Email
+2026-06-13 18:36:59.347 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 18:36:59.362 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Login (Chest X-ray) in 782.3942ms
+2026-06-13 18:36:59.373 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 18:36:59.394 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/auth/login - 200 535 application/json; charset=utf-8 930.2343ms
+2026-06-13 18:37:17.575 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundarypDARgxDVEBZlB8iL 12121
+2026-06-13 18:37:17.661 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:37:17.677 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:37:17.701 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 18:37:17.717 +03:00 [INF] Start processing HTTP request POST https://holmes-soccer-mls-transit.trycloudflare.com/api/predict
+2026-06-13 18:37:17.727 +03:00 [INF] Sending HTTP request POST https://holmes-soccer-mls-transit.trycloudflare.com/api/predict
+2026-06-13 18:37:18.533 +03:00 [INF] Received HTTP response headers after 795.1071ms - 200
+2026-06-13 18:37:18.538 +03:00 [INF] End processing HTTP request after 821.5587ms - 200
+2026-06-13 18:37:18.871 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Precision = 5) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Reports] ([CreatedAt], [HeatmapImagePath], [OriginalImagePath], [OverallConfidence], [PredictionsJson], [PrimaryDisease], [ReportName], [Status], [UserId])
+OUTPUT INSERTED.[ReportId]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-06-13 18:37:18.887 +03:00 [INF] Executing ObjectResult, writing value of type 'Chest_Xray.DTOs.ReportDto'.
+2026-06-13 18:37:18.894 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 1185.2138ms
+2026-06-13 18:37:18.906 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:37:18.922 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 201 481 application/json; charset=utf-8 1347.4412ms
+2026-06-13 18:37:27.944 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/api/reports/25/pdf - null null
+2026-06-13 18:37:28.004 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray)'
+2026-06-13 18:37:28.034 +03:00 [INF] Route matched with {action = "DownloadPdf", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] DownloadPdf(Int32) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 18:37:28.099 +03:00 [INF] Executed DbCommand (16ms) [Parameters=[@reportId='?' (DbType = Int32), @userId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[ReportId], [r].[CreatedAt], [r].[HeatmapImagePath], [r].[OriginalImagePath], [r].[OverallConfidence], [r].[PredictionsJson], [r].[PrimaryDisease], [r].[ReportName], [r].[Status], [r].[UserId]
+FROM [Reports] AS [r]
+WHERE [r].[ReportId] = @reportId AND [r].[UserId] = @userId
+2026-06-13 18:37:28.465 +03:00 [INF] Executing FileContentResult, sending file with download name 'Report_20260613.pdf' ...
+2026-06-13 18:37:28.523 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray) in 481.0507ms
+2026-06-13 18:37:28.540 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.DownloadPdf (Chest X-ray)'
+2026-06-13 18:37:28.554 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/api/reports/25/pdf - 200 131907 application/pdf 609.598ms
+2026-06-13 18:37:54.827 +03:00 [INF] Application is shutting down...
+2026-06-13 18:38:15.997 +03:00 [INF] User profile is available. Using 'C:\Users\lab\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-06-13 18:38:16.213 +03:00 [INF] Now listening on: http://localhost:5098
+2026-06-13 18:38:16.232 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-13 18:38:16.238 +03:00 [INF] Hosting environment: Development
+2026-06-13 18:38:16.243 +03:00 [INF] Content root path: D:\Saif\New Style\Final_Project\Chest X-ray
+2026-06-13 18:38:20.332 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/index.html - null null
+2026-06-13 18:38:20.814 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/index.html - 200 null text/html;charset=utf-8 485.0118ms
+2026-06-13 18:38:21.575 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - null null
+2026-06-13 18:38:22.063 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 489.3773ms
+2026-06-13 18:38:37.877 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/auth/login - application/json-patch+json 59
+2026-06-13 18:38:37.978 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-06-13 18:38:38.000 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:38:38.095 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 18:38:38.144 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Chest_Xray.DTOs.LoginDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 18:38:40.706 +03:00 [INF] Executed DbCommand (99ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedAt], [u].[Email], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @dto_Email
+2026-06-13 18:38:41.280 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 18:38:41.402 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Login (Chest X-ray) in 3221.7009ms
+2026-06-13 18:38:41.425 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 18:38:41.812 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/auth/login - 200 535 application/json; charset=utf-8 3935.314ms
+2026-06-13 18:38:58.798 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryIaJ6FE1Hv5fFElL8 390298
+2026-06-13 18:38:59.069 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:38:59.165 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:38:59.181 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 18:38:59.281 +03:00 [INF] Start processing HTTP request POST https://holmes-soccer-mls-transit.trycloudflare.com/
+2026-06-13 18:38:59.296 +03:00 [INF] Sending HTTP request POST https://holmes-soccer-mls-transit.trycloudflare.com/
+2026-06-13 18:39:00.735 +03:00 [INF] Received HTTP response headers after 1431.9211ms - 405
+2026-06-13 18:39:00.742 +03:00 [INF] End processing HTTP request after 1462.3859ms - 405
+2026-06-13 18:39:00.765 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 1567.6686ms
+2026-06-13 18:39:00.771 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:39:00.774 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: AI Service Error (MethodNotAllowed): {"detail":"Method Not Allowed"}
+   at Chest_Xray.Services.AiPredictionService.PredictAsync(String base64Image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\AiPredictionService.cs:line 43
+   at Chest_Xray.Services.ReportService.UploadAndAnalyzeAsync(Int32 userId, IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Services\ReportService.cs:line 56
+   at Chest_Xray.Controllers.ReportsController.UploadAndAnalyze(IFormFile image) in D:\Saif\New Style\Final_Project\Chest X-ray\Controllers\ReportsController.cs:line 33
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-06-13 18:39:00.861 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 500 null text/plain; charset=utf-8 2063.5403ms
+2026-06-13 18:39:07.011 +03:00 [INF] Application is shutting down...
+2026-06-13 18:39:25.306 +03:00 [INF] User profile is available. Using 'C:\Users\lab\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-06-13 18:39:25.505 +03:00 [INF] Now listening on: http://localhost:5098
+2026-06-13 18:39:25.513 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-13 18:39:25.518 +03:00 [INF] Hosting environment: Development
+2026-06-13 18:39:25.525 +03:00 [INF] Content root path: D:\Saif\New Style\Final_Project\Chest X-ray
+2026-06-13 18:39:28.345 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/index.html - null null
+2026-06-13 18:39:28.568 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/index.html - 200 null text/html;charset=utf-8 225.4275ms
+2026-06-13 18:39:29.364 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - null null
+2026-06-13 18:39:29.846 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 484.7157ms
+2026-06-13 18:39:42.980 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/auth/login - application/json-patch+json 59
+2026-06-13 18:39:43.057 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-06-13 18:39:43.067 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:39:43.132 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 18:39:43.245 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Chest_Xray.DTOs.LoginDto) on controller Chest_Xray.Controllers.AuthController (Chest X-ray).
+2026-06-13 18:39:46.381 +03:00 [INF] Executed DbCommand (67ms) [Parameters=[@dto_Email='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedAt], [u].[Email], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @dto_Email
+2026-06-13 18:39:46.896 +03:00 [INF] Executing OkObjectResult, writing value of type 'Chest_Xray.DTOs.AuthResponseDto'.
+2026-06-13 18:39:46.967 +03:00 [INF] Executed action Chest_Xray.Controllers.AuthController.Login (Chest X-ray) in 3683.5795ms
+2026-06-13 18:39:46.988 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.AuthController.Login (Chest X-ray)'
+2026-06-13 18:39:47.128 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/auth/login - 200 535 application/json; charset=utf-8 4147.023ms
+2026-06-13 18:40:06.712 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5098/api/reports - multipart/form-data; boundary=----WebKitFormBoundaryyzIAJenAwtQHNSPM 387621
+2026-06-13 18:40:06.805 +03:00 [INF] CORS policy execution successful.
+2026-06-13 18:40:06.966 +03:00 [INF] Executing endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:40:07.035 +03:00 [INF] Route matched with {action = "UploadAndAnalyze", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadAndAnalyze(Microsoft.AspNetCore.Http.IFormFile) on controller Chest_Xray.Controllers.ReportsController (Chest X-ray).
+2026-06-13 18:40:07.222 +03:00 [INF] Start processing HTTP request POST https://holmes-soccer-mls-transit.trycloudflare.com/api/predict
+2026-06-13 18:40:07.228 +03:00 [INF] Sending HTTP request POST https://holmes-soccer-mls-transit.trycloudflare.com/api/predict
+2026-06-13 18:40:10.576 +03:00 [INF] Received HTTP response headers after 3338.232ms - 200
+2026-06-13 18:40:10.593 +03:00 [INF] End processing HTTP request after 3376.5501ms - 200
+2026-06-13 18:40:11.274 +03:00 [INF] Executed DbCommand (16ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Precision = 5) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Reports] ([CreatedAt], [HeatmapImagePath], [OriginalImagePath], [OverallConfidence], [PredictionsJson], [PrimaryDisease], [ReportName], [Status], [UserId])
+OUTPUT INSERTED.[ReportId]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-06-13 18:40:11.427 +03:00 [INF] Executing ObjectResult, writing value of type 'Chest_Xray.DTOs.ReportDto'.
+2026-06-13 18:40:11.488 +03:00 [INF] Executed action Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray) in 4441.8933ms
+2026-06-13 18:40:11.508 +03:00 [INF] Executed endpoint 'Chest_Xray.Controllers.ReportsController.UploadAndAnalyze (Chest X-ray)'
+2026-06-13 18:40:11.540 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5098/api/reports - 201 482 application/json; charset=utf-8 4828.2094ms
+2026-06-13 18:45:43.601 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5098/swagger/index.html - null null
+2026-06-13 18:45:43.610 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5098/swagger/index.html - 200 null text/html;charset=utf-8 9.0058ms
+2026-06-13 18:53:45.289 +03:00 [INF] Application is shutting down...

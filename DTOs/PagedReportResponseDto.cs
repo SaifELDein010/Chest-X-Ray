@@ -25,7 +25,7 @@ public class PaginationDto
 
 public class ReportListItemDto
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string Status { get; set; } = string.Empty;
     public string? PrimaryDisease { get; set; }
     public decimal OverallConfidence { get; set; }
